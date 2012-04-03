@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>Plugin Examples</title>
+		<link href="http://cdn.kendostatic.com/2012.1.322/styles/kendo.common.min.css" type="text/css" rel="stylesheet" />
+		<link href="http://cdn.kendostatic.com/2012.1.322/styles/kendo.blueopal.min.css" type="text/css" rel="stylesheet" />
+	
+		<style>
+		
+			.container {
+			    padding-top: 10px;
+			}
+
+			.center {
+			    width: 700px;
+			    margin: auto;
+			}
+
+			h2 {
+			    font-size: 2em;
+			    font: "Helvetica";
+			}​
+			
+		</style>
+	
+	</head>
+	<body>
+	
+		<div class="container">
+		    <div class="center">
+		        <div id="youtube" data-role="youtube" data-template="template"></div>
+		    </div>
+		</div>
+		
+		<script type="text/x-kendo-template" id="template">
+		    <div style="padding: 10px;">
+		        <div style="float: left;">
+		            <a href="\#" data-id="${id}" data-title="${title}" class="k-youtube-popup">
+		                <img height="90" width="120" src="${thumbnail.sqDefault}" alt="thumbnail"/>
+		            </a>
+		        </div>
+		        <div style="margin-left: 130px; height: 90px;">
+		            <h4 style="margin: 2px">
+		                <a href="${player.default}" target="_blank">${title}</a>
+		            </h4>
+		            <div style="font-size: .8em">
+		                <p>${description}</p>
+		            </div>
+		        </div>
+		    </div>
+		</script>
+
+		<script type="text/x-kendo-template" id="popup">
+			<iframe width='640' height='480' src='http://www.youtube.com/embed/${data}?rel=0' frameborder='0'></iframe>
+		</script>
+		
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" ></script>
+		<script src="http://cdn.kendostatic.com/2012.1.322/js/kendo.all.min.js"></script>
+		<script src="kendo.youtube.min.js"></script>
+		<script>
+			
+			$(function() {
+				
+				// create the popup window for the result
+				var win = $("<div></div>").kendoWindow({
+				    visible: false,
+				    modal: true,
+				    deactivate: function(e) {
+				        $(this.element).html("");
+				    }
+				}).data("kendoWindow");
+
+				// get the template for the popup
+				popupTemplate = kendo.template($("#popup").html());
+
+				// attach an event listener to every youtube thumb which will open the popup
+				$(".container").on("click", ".k-youtube-popup", function(e) {
+
+				    var id = $(e.currentTarget).data("id");
+				    var title = $(e.currentTarget).data("title");
+
+				    win.content(popupTemplate(id));
+				    win.title(title);
+				    win.center();
+				    win.open();
+
+				    e.preventDefault();
+				});
+
+				// bind the widgets with kendo declarative initialization
+				kendo.bind($(".container"));
+				
+			});
+			
+		</script>
+
+
+	</body>
+	
+	
+	
+	
+
+</html>

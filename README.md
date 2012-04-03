@@ -1,0 +1,1 @@
+### A project containing Kendo UI plugins, extended widgets and composite controls
