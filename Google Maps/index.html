@@ -24,11 +24,28 @@
 
 	<script>
 
-		$("#map_canvas").kendoMap({
-			dataSource: [ { "lat": 35.751179, "lng": -86.930002 },
-  						  { "lat": 36.033116, "lng": -86.782777 } ]
-		});
+		var success = function(position) {
+			var data = [{ title: "My House!", lat: position.coords.latitude, lng: position.coords.longitude }];
+			$("#map_canvas").kendoMap({
+				dataSource: data,
+				marker: {
+					options: {
+						draggable: false,
+						title: "My House!",
+						animation: google.maps.Animation.DROP
+					}
+				}
+			});	
+		};
 		
+		var failure = function() {
+			// we couldn't get the user's position, so just show a default map
+			$("#map_canvas").kendoMap();	
+		};
+
+		// get the users location with teh html5z
+		navigator.geolocation.getCurrentPosition(success, failure);
+
 	</script>
 
 </body>

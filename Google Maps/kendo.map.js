@@ -23,6 +23,10 @@
                 // base call to widget initialization
                 Widget.fn.init.call(this, element, options);
 
+                // compile the marker template if applicable
+                if (that.options.marker.template)
+                    that.template = kendo.template(that.options.marker.template);
+
                 that._createMap();
 
                 that._dataSource();
@@ -38,16 +42,14 @@
             latField: "lat",
             lngField: "lng",
             titleField: "title",
-            mapOptions: {
-                zoom: 8,
-                center: new google.maps.LatLng("36.166667","-86.783333"),
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+            fitBounds: false,
+            map: {
+                options: {}
             },
-            markerOptions: {
-                draggable:true,
-                animation: google.maps.Animation.DROP
-            },
-            template: "<p>A Marker!</p>"
+            marker: {
+                options: {},
+                template: null
+            }
         },
 
         refresh: function() {
@@ -66,21 +68,29 @@
                 bounds.extend(latlng);
 
                 // drop a marker
-                that.dropMarker(latlng);
+                that.dropMarker(latlng, view[i]);
             }
 
             // recenter the map on the bounds
-            map.fitBounds(bounds);
+            if (that.options.fitBounds) {
+                that.map.fitBounds(bounds);
+            }
         
         },
 
         _createMap: function() {
 
-            var that = this;
+            var that = this,
+                options = that.options.map.options
+
+            // some options are needed by default
+            options.zoom = options.zoom || 8;
+            options.center = options.center || new google.maps.LatLng("36.166667","-86.783333");
+            options.mapTypeId = options.mapTypeId || google.maps.MapTypeId.ROADMAP;
 
             // create the map. if an array of elements are passed, only the first
             // will be used.
-            map = new google.maps.Map(that.element[0], that.options.mapOptions);
+            that.map = new google.maps.Map(that.element[0], options);
 
         },
 
@@ -92,27 +102,31 @@
             );
         },
 
-        dropMarker: function(latlng) {
+        dropMarker: function(latlng, data) {
             var that = this,
-                options = that.options.markerOptions;
+                markerSettings = that.options.marker;
 
             // add a few things onto the options object
-            options.map = map;
-            options.position = latlng;
+            markerSettings.options.map = that.map;
+            markerSettings.options.position = latlng;
 
-            var marker = new google.maps.Marker(options);  
+            var marker = new google.maps.Marker(markerSettings.options);  
 
-            that._infoWindow(marker);         
+            if (that.template) {
+                that._infoWindow(marker, data);         
+            }
         },
 
-        _infoWindow: function(marker) {
+        _infoWindow: function(marker, data) {
             var that = this,
-                infoWindow = new google.maps.InfoWindow({
-                    content: "<h2>Yay!</h2>"
-                });
+                html = kendo.render(that.template, [ data ]);
+
+            var infoWindow = new google.maps.InfoWindow({
+                content: html
+            });
 
             google.maps.event.addListener(marker, "click", function() {
-                infoWindow.open(map, marker);
+                infoWindow.open(that.map, marker);
             });
         },
 
