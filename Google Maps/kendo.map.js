@@ -5,7 +5,6 @@
     ui = kendo.ui,
     Widget = ui.Widget,
     CHANGE = "change",
-    geocoder = new google.maps.Geocoder(),
     map;
 
     var Map = Widget.extend({
@@ -16,7 +15,7 @@
 
             // before we initialize the widget, figure out if the 
             // google maps script has been included.
-            if (!window.google.maps) {
+            if (!window.google) {
                 kendo.logToConsole("It doesn't appear that you have Google Maps library loaded.");
             }
             else {
