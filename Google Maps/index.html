@@ -25,12 +25,23 @@
 	<script>
 
 		var success = function(position) {
-			var data = [{ title: "My House!", lat: position.coords.latitude, lng: position.coords.longitude }];
+			// var data = [{ title: "My House!", lat: position.coords.latitude, lng: position.coords.longitude }];
+			var data = [{ address: "1826 Nantes Court Spring Hill, TN 37174" }, { address: "1606 Harrison Way Spring Hill, TN 37174" }];
 			$("#map_canvas").kendoMap({
 				dataSource: data,
+				addressField: "address",
+				fitBounds: true,
+				map: {
+					options: {
+						zoom: 8
+					}
+				},
 				marker: {
 					options: {
-						draggable: false,
+						draggable: true,
+						ondrag: function() {
+
+						},
 						title: "My House!"
 					}
 				}

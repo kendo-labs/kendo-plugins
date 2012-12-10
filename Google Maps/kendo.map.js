@@ -5,7 +5,8 @@
     ui = kendo.ui,
     Widget = ui.Widget,
     CHANGE = "change",
-    map;
+    markers = [],
+    infoWindows = [];
 
     var Map = Widget.extend({
 
@@ -26,6 +27,13 @@
                 if (that.options.marker.template)
                     that.template = kendo.template(that.options.marker.template);
 
+                // create the default maps options
+                that._mapOptions = {
+                    zoom: 8,
+                    center: new google.maps.LatLng("36.166667","-86.783333"),
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+
                 that._createMap();
 
                 that._dataSource();
@@ -40,6 +48,7 @@
             autoBind: true,
             latField: "lat",
             lngField: "lng",
+            addressField: null,
             titleField: "title",
             fitBounds: false,
             map: {
@@ -55,64 +64,83 @@
 
             var that = this,
                 view = that.dataSource.view(),
-                bounds = bounds || new google.maps.LatLngBounds();
+                fitBounds = false;
+
+            // make sure the necessary google objects exist
+            that.bounds = new google.maps.LatLngBounds();
 
             // iterate through the results set and drop markers
-            var length = view.length;
-            for (var i = 0; i < length; i++) {
-                // create the lat lng object
-                var latlng = new google.maps.LatLng(view[i][that.options.latField], view[i][that.options.lngField]);
+            // this isn't the fastest way to loop, but it's the cleanest
+            $.each(view, function(index, item) {
 
-                // extend the map bounds to include this marker
-                bounds.extend(latlng);
+                // if this is the last item, we want to fit the bounds if applicable
+                if ( index === view.length ) {
+                    fitBounds = true;
+                }
 
-                // drop a marker
-                that.dropMarker(latlng, view[i]);
-            }
-
-            // recenter the map on the bounds
-            if (that.options.fitBounds) {
-                that.map.fitBounds(bounds);
-            }
-        
+                // check the address field, if it's populated, try and 
+                // geocode it
+                // TODO: Function in a loop? Is there a better way?
+                if (that.options.addressField) {
+                    that.geocode(item[that.options.addressField]).then(function(results) {
+                        that.dropMarker(results[0].geometry.location, item, fitBounds);
+                    });
+                }
+                else {
+                    // create a new latlng object
+                    var latlng = new google.maps.LatLng(item[that.options.latField], item[that.options.lngField]);
+                    that.dropMarker(latlng, item, fitBounds);
+                }
+            });
         },
 
         _createMap: function() {
 
             var that = this,
-                options = that.options.map.options
+                options = that.options.map.options;
 
-            // some options are needed by default
-            options.zoom = options.zoom || 8;
-            options.center = options.center || new google.maps.LatLng("36.166667","-86.783333");
-            options.mapTypeId = options.mapTypeId || google.maps.MapTypeId.ROADMAP;
+            $.extend(that._mapOptions, options);
 
             // create the map. if an array of elements are passed, only the first
             // will be used.
-            that.map = new google.maps.Map(that.element[0], options);
-
+            that.map = new google.maps.Map(that.element[0], that._mapOptions);
         },
 
-        _geocode: function(address, callback) {
-            geocode.geocode({ 'address': address },
-                function(results, status) {
-                    callback();
-                }
-            );
-        },
-
-        dropMarker: function(latlng, data) {
+        geocode: function(address, callback, data) {
             var that = this,
-                markerSettings = that.options.marker;
+            dfr = $.Deferred();
+                
+            that._geocoder = that._geocoder || new google.maps.Geocoder();
 
-            // add a few things onto the options object
-            markerSettings.options.map = that.map;
-            markerSettings.options.position = latlng;
+            that._geocoder.geocode({ 'address': address }, dfr.resolve);
 
-            var marker = new google.maps.Marker(markerSettings.options);  
+            return dfr.promise();
+        },
 
-            if (that.template) {
+        dropMarker: function(latlng, data, fitBounds) {
+            var that = this;
+
+            // create the required marker options
+            markerOptions = { map: that.map, position: latlng };
+
+            // extend the options onto the required options
+            $.extend(markerOptions, that.options.marker.options);
+
+            // create the marker
+            var marker = new google.maps.Marker(markerOptions);  
+
+            // add the marker to a list of markers
+            markers.push(marker);
+
+            if (data && that.template) {
                 that._infoWindow(marker, data);         
+            }
+
+            if (that.options.fitBounds) {
+                // extend the map bounds to include this marker
+                that.bounds.extend(latlng);
+                // recenter the map on the bounds
+                that.map.fitBounds(that.bounds);
             }
         },
 
