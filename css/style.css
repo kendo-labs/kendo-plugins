@@ -1,0 +1,21 @@
+body, html {
+	width: 100%;
+}
+
+.map {
+	width: 480px;
+	height: 400px;
+}
+
+.map img { 
+  max-width: none;
+}
+
+.map label { 
+  width: auto; display:inline; 
+} 
+
+#container, header {
+	margin: auto;
+	width: 1000px;
+}

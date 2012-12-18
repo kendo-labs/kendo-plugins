@@ -1,0 +1,47 @@
+<div class="row-fluid">
+	<div class="span6">
+		<h3>Simple Map</h3>
+		<p>This is the simplest example of using the map.  All you need to do is have a div with a specified size.</p>
+
+		<pre>
+&lt;div class='map'&gt;&lt;/div&gt;
+		</pre>
+
+		<p>And then you can just call the <b>kendo.map</b> function</p>
+
+		<pre>
+// create a simple map
+$('#simple').kendoMap();
+		</pre>
+
+	</div>
+	<div class="span6">
+		<h3>Example</h3>
+		<div class="map" id="simple"></div>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span6">
+		<h3>Map Centering</h3>
+
+		<p>By default, the map is centered over Nashville, TN.  The map has to have a center point when it's created.  You can provide your own center by providing a google latitude and longitude object, or just an address or country name.  As long as Google can geocode it, it should work.</p>
+
+		<p>When providing your own center, you will probably want to provide the zoom level as well. The <b>zoom</b> is <b>8</b> by default.  In the case of centering over something as large as the USA, we set the zoom much lower to zoom out.</p>
+
+    <pre>
+// create a map centered over the US of A
+$('#usa').kendoMap({
+   map: {
+      options: {
+         center: 'USA',
+         zoom: 3
+      }
+   }
+});
+    </pre>
+  </div>
+  <div class="span6">
+		<h3>Example</h3>
+			<div class="map" id="usa"></div>
+	</div>
+</div>
