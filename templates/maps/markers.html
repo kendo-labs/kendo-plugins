@@ -1,72 +1,108 @@
 <div class="row-fluid">
-   <div class="span6">
-      <h3>Markers</h3>
-
-      <p>You have quite a bit of control over the markers on the map.  In fact, any value that can be passed to the markerOptions object can be passed in via the <b>options</b> object on the <b>markers</b> options object.</p>
-      <p>For instance, you can specify an animation using the <b>google.marker.animation</b> constant.</p>
-
-      <pre>
-var data = [
-   { latitude: 28.381642, longitude: -81.56376, 
-     name: "Disney World" },
-   { latitude: 28.474907, longitude: -81.466316, 
-     name: "Universal Studios" },
-   { latitude: 28.411785, longitude: -81.460018, 
-     name: "Sea World" }];
-
-$("#position").kendoMap({
-   dataSource: data,
-   latField: "latitude",
-   lngField: "longitude",
-   map: {
-      options: {
-         center: {
-            lat: 28.434783,
-            lng: -81.518497
-         },
-         zoom: 10
-      }
-   }
-});
-      </pre>
-
-      </div>
-      <div class="span6">
-         <h3>Example</h3>
-         <div class="map" id="marker_templates"></div>
-      </div>
-   </div>
+  <h2>Map Marker Customization And Templates</h2>
 </div>
-<div class="row_fluid">
-   <div class="span6">
-      <h3>Geocoding</h3>
-      <p>Sometimes you don't know the latitude and longitude of your points.  That's OK as the maps widget will try and geocode them for you using the Google Maps Geocoder.  This works for the center point AND any data points.</p>
-      <p>For data points, instead of specifying a <b>latField</b> or <b>lngField</b>, simply provide an <b>addressField</b>.  If you do not provide one, it looks for a field called <b>address</b> by default.</p>
-            <pre>
-var data = [
-   { latitude: 28.381642, longitude: -81.56376, 
-     name: "Disney World" },
-   { latitude: 28.474907, longitude: -81.466316, 
-     name: "Universal Studios" },
-   { latitude: 28.411785, longitude: -81.460018, 
-     name: "Sea World" }];
+<div class="row-fluid">
+  <div class="span6">
+    <h3>Marker Options</h3>
+    <p>You can tweak the marker by passing any of the supported <a href="https://developers.google.com/maps/documentation/javascript/reference\#MarkerOptions">marker options</a> of the Google Maps v3 API.</p>
+    <p>You can control things like animation and draggability.</p>
+    <pre>
+var data = [{ lat: 28.381642, lng: -81.56376, 
+              name: "Disney World" },
+            { lat: 28.474907, lng: -81.466316, 
+              name: "Universal Studios" },
+            { lat: 28.411785, lng: -81.460018, 
+              name: "Sea World" }];
 
-$("#position").kendoMap({
-   dataSource: data,
-   addressField: "name",
-   map: {
+("\#marker_templates").kendoMap({
+  dataSource: data,
+  map: {
+    options: {
+      center: {
+          lat: 28.434783,
+          lng: -81.518497
+      },
+      zoom: 10
+    },
+    marker: {
+      template: "<span>#: name #</span>",
       options: {
-         center: "Sheen Lake",
-         zoom: 10
+        animation: google.maps.Animation,
+        draggable: true
       }
-   }
-});
-      </pre>
-   </div>
-   <div class="span6">
-      <h3>Example</h3>
-      <div class="map" id="position_geocode"></div>
-   </div>
+    }
+  }
+});</pre>
+  </div>
+  <div class="span6">
+    <h3>Example</h3>
+    <div class="map" id="animation"></div>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span6">
+    <h3>Markers</h3>
+    <p>You have quite a bit of control over the markers on the map.  In fact, any value that can be passed to the markerOptions object can be passed in via the <b>options</b> object on the <b>markers</b> options object.</p>
+    <p>For instance, you can specify an animation using the <b>google.marker.animation</b> constant.</p>
+    <pre>
+var data = [{ lat: 28.381642, lng: -81.56376, 
+              name: "Disney World" },
+            { lat: 28.474907, lng: -81.466316, 
+              name: "Universal Studios" },
+            { lat: 28.411785, lng: -81.460018, 
+              name: "Sea World" }];
+
+dom.find("\#marker_templates").kendoMap({
+dataSource: data,
+  map: {
+    options: {
+      center: {
+          lat: 28.434783,
+          lng: -81.518497
+      },
+      zoom: 10
+    }
+  },
+  marker: {
+     template: "<span>\#: name \#</span>"
+  }
+});</pre>
+
+  </div>
+  <div class="span6">
+     <h3>Example</h3>
+     <div class="map" id="infowindows"></div>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span6">
+    <h3>Fitting To Bounds</h3>
+    <p>It's more likely that you will have data points but not know the exact center of those points.  In this case, you can "fit" the map to your bounds.  This is turned off by default.  You can enable it by setting <b>fitBounds: true</b></p>
+        <pre>
+var data = [{ lat: 28.381642, lng: -81.56376, 
+              name: "Disney World" },
+            { lat: 28.474907, lng: -81.466316, 
+              name: "Universal Studios" },
+            { lat: 28.411785, lng: -81.460018, 
+              name: "Sea World" }];
+
+dom.find("\#marker_templates").kendoMap({
+dataSource: data,
+  map: {
+    options: {
+      zoom: 10
+    }
+  },
+  fitBounds: true,
+  marker: {
+     template: "<span>\#: name \#</span>"
+  }
+});</pre>
+  </div>
+  <div class="span6">
+    <h3>Example</h3>
+    <div class="map" id="fitbounds"></div>
+  </div>
 </div>
    
 

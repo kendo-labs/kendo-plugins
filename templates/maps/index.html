@@ -1,4 +1,7 @@
 <div class="row-fluid">
+	<h2>Basic Maps Configuration</h2>
+</div>
+<div class="row-fluid">
 	<div class="span6">
 		<h3>Simple Map</h3>
 		<p>This is the simplest example of using the map.  All you need to do is have a div with a specified size.</p>
@@ -11,7 +14,7 @@
 
 		<pre>
 // create a simple map
-$('#simple').kendoMap();
+$('\#simple').kendoMap();
 		</pre>
 
 	</div>
@@ -30,7 +33,7 @@ $('#simple').kendoMap();
 
     <pre>
 // create a map centered over the US of A
-$('#usa').kendoMap({
+$('\#usa').kendoMap({
    map: {
       options: {
          center: 'USA',
@@ -43,5 +46,29 @@ $('#usa').kendoMap({
   <div class="span6">
 		<h3>Example</h3>
 			<div class="map" id="usa"></div>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span6">
+		<h3>Maps Customization</h3>
+		<p>You can customize the map by passing virtually any of the <a href="">mapsOptions</a> values to the <b>maps.options</b> object.</p>
+		<p>In this example, the controls are disabled and the map type is set to <b>sattelite</b> to give us a nice arial view of The Grand Canyon.</p>
+		<pre>
+// customized map
+$("\#customized").kendoMap({
+   map: {
+      options: {
+      	center: "The Grand Canyon",
+      	draggable: false,
+      	disableDefaultUI: true,
+      	mapTypeId: google.maps.MapTypeId.SATELLITE
+      }
+   }
+});
+		</pre>
+	</div>
+	<div class="span6">
+		<h3>Example</h3>
+		<div class="map" id="customized"></div>
 	</div>
 </div>

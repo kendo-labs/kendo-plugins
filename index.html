@@ -11,18 +11,31 @@
 <body>
 
   <header>
+    <h1>Kendo UI Plugins</h1>
+    <p><i>A proud member of Kendo UI Labs</i></p>
     <ul id="menu">
       <li>
         <a href="#/">Home</a>
       </li>
       <li>
-        <a href="#maps">Maps</a>
+        Maps
         <ul>
           <li>
+            <a href="#maps">Basic</a>
+          </li>
+          <li>
             <a href="#maps/binding">Data Binding</a>
+          </li>
+          <li>
             <a href="#maps/markers">Markers</a>
           </li>
         </ul>
+      </li>
+      <li>
+        <a href="#youtube">YouTube</a>
+      </li>
+      <li>
+        <a href="#custom">Custom Widgets</a>
       </li>
     </ul>
   </header>
@@ -33,12 +46,14 @@
   <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
   <script src="http://cdn.kendostatic.com/2012.3.1114/js/kendo.all.min.js"></script>
   <script src="Router/kendo.router.js"></script>
+  <script src="View/kendo.view.js"></script>
   <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?sensor=false">
     </script>
   <script src="GoogleMaps/kendo.map.js"></script>
   <script src="js/template.js"></script>
   <script src="js/map/map.js"></script>
+  <script src="js/home.js"></script>
 
   <script>
 
@@ -63,7 +78,7 @@
       });
 
       router.get("/", function() {
-        container.empty();
+        APP.home.index(container, "templates/home/index.html");
       });
 
       router.start();

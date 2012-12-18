@@ -34,9 +34,10 @@
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
 
-                that._createMap();
-
-                that._dataSource();
+                // map creation is a deferred for geocoding
+                that._createMap().then(function() {
+                    that._dataSource();
+                });
             }
         },
 
@@ -74,7 +75,7 @@
             $.each(view, function(index, item) {
 
                 // if this is the last item, we want to fit the bounds if applicable
-                if ( index === view.length ) {
+                if ( index === view.length - 1 && that.options.fitBounds ) {
                     fitBounds = true;
                 }
 
@@ -97,7 +98,8 @@
         _createMap: function() {
 
             var that = this,
-                options = that.options.map.options;
+                options = that.options.map.options,
+                dfr = $.Deferred();
 
             $.extend(that._mapOptions, options);
 
@@ -109,18 +111,22 @@
                     // will be used.
                     that._mapOptions.center = new google.maps.LatLng(options.center.lat, options.center.lng);
                     that.map = new google.maps.Map(that.element[0], that._mapOptions);
+                    dfr.resolve();
                 }
                 else {
                     that.geocode(options.center).then(function(results) {
                         that._mapOptions.center = results[0].geometry.location;
                         that.map = new google.maps.Map(that.element[0], that._mapOptions);
+                        dfr.resolve();
                     });
                 }
             }
             else {
                 that.map = new google.maps.Map(that.element[0], that._mapOptions);
+                dfr.resolve();
             }
-            
+        
+            return dfr.promise();        
         },
 
         geocode: function(address) {
@@ -138,13 +144,13 @@
             var that = this;
 
             // create the required marker options
-            markerOptions = { map: that.map, position: latlng };
+            that._markerOptions = { map: that.map, position: latlng };
 
             // extend the options onto the required options
-            $.extend(markerOptions, that.options.marker.options);
+            $.extend(that._markerOptions, that.options.marker.options);
 
             // create the marker
-            var marker = new google.maps.Marker(markerOptions);  
+            var marker = new google.maps.Marker(that._markerOptions);  
 
             // add the marker to a list of markers
             markers.push(marker);
@@ -153,12 +159,30 @@
                 that._infoWindow(marker, data);         
             }
 
-            if (that.options.fitBounds) {
-                // extend the map bounds to include this marker
-                that.bounds.extend(latlng);
+            // extend the map bounds to include this marker
+            that.bounds.extend(latlng);
+
+            if (fitBounds) {    
                 // recenter the map on the bounds
                 that.map.fitBounds(that.bounds);
+                // zoom if necessary. google maps
+                // doesn't do this by default with fitBounds
+                // because they are both async ops
+                that._zoom();
             }
+        },
+
+        _zoom: function() {
+
+            var that = this;
+
+            if (that._mapOptions.zoom) {
+                var listener = google.maps.event.addListener(that.map, "idle",  function() { 
+                    that.map.setZoom(that._mapOptions.zoom); 
+                    google.maps.event.removeListener(listener); 
+                });
+            }
+
         },
 
         _infoWindow: function(marker, data) {
