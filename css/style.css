@@ -15,6 +15,10 @@ body, html {
   width: auto; display:inline; 
 } 
 
+header {
+	opacity: 0;
+}
+
 #container, header {
 	margin: auto;
 	width: 1000px;

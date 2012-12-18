@@ -14,7 +14,7 @@ var data = [{ lat: 28.381642, lng: -81.56376,
             { lat: 28.411785, lng: -81.460018, 
               name: "Sea World" }];
 
-("\#marker_templates").kendoMap({
+("\#animation").kendoMap({
   dataSource: data,
   map: {
     options: {
@@ -52,8 +52,8 @@ var data = [{ lat: 28.381642, lng: -81.56376,
             { lat: 28.411785, lng: -81.460018, 
               name: "Sea World" }];
 
-dom.find("\#marker_templates").kendoMap({
-dataSource: data,
+dom.find("\#infowindows").kendoMap({
+  dataSource: data,
   map: {
     options: {
       center: {
@@ -77,7 +77,8 @@ dataSource: data,
 <div class="row-fluid">
   <div class="span6">
     <h3>Fitting To Bounds</h3>
-    <p>It's more likely that you will have data points but not know the exact center of those points.  In this case, you can "fit" the map to your bounds.  This is turned off by default.  You can enable it by setting <b>fitBounds: true</b></p>
+    <p>It's more likely that you will have data points but not know the exact center of those points.  In this case, you can "fit" the map to your bounds.  This is turned off by default.  You can enable it by setting <b>fitBounds: true</b>.  
+    <p>You will most likely want to set the zoom level as well or your markers will be at the edges of your map.  Google Maps does not fit bounds and zoom at the same time, but the widget attaches a listener to the maps idle event and then applies the zoom for you.</p>
         <pre>
 var data = [{ lat: 28.381642, lng: -81.56376, 
               name: "Disney World" },
@@ -86,8 +87,8 @@ var data = [{ lat: 28.381642, lng: -81.56376,
             { lat: 28.411785, lng: -81.460018, 
               name: "Sea World" }];
 
-dom.find("\#marker_templates").kendoMap({
-dataSource: data,
+dom.find("\#fitbounds").kendoMap({
+  dataSource: data,
   map: {
     options: {
       zoom: 10
