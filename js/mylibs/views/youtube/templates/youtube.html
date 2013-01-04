@@ -1,0 +1,81 @@
+<div class="row-fluid">
+	<h2>Kendo UI YouTube Widget</h2>
+</div>
+<div class="row-fluid">
+  <div class="span6">
+    <h3>Basic Use</h3>
+    <p>The YouTube Widget is an example of a composite widget, or a widget comprised of other widgets.  The YouTube Widget is built with an AutoComplete, A ListView, and a Pager Control.</p>
+    <p>It uses the Google Suggest service to suggest searches for you and pulls from the YouTube API when it actually searches.  This allows it to auto-correct your mispellings as you type making searching easier and more acurate.</p>
+    <p>The simplest use of the widget is to call <b>kendoYouTube()</b> on a <b>Div</b> element.</p>
+    <pre>
+// create a simple map
+$('\#simple_youtube').kendoYouTube();
+    </pre>
+  </div>
+  <div class="span6">
+    <h3>Basic Example</h3>
+    <div id="youtube_simple"></div>  
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span12">
+    <h3>Using Templates</h3>
+    <p>You can control the way that the results are displayed by specifying a template for the widget.  This means that you can add in other widgets like the Kendo UI Window to play the returned video in.</p>
+    <p>In this example, the clicking on the video thumbnail will launch a Kendo UI Window. Click on the video title will redirect to it on YouTube.</p>
+  <pre>
+&lt;script type=&quot;text/x-kendo-template&quot; id=&quot;template&quot;&gt;
+  &lt;div style=&quot;padding: 10px;&quot;&gt;
+      &lt;div style=&quot;float: left;&quot;&gt;
+          &lt;a href=&quot;\#&quot; data-id=&quot;${id}&quot; data-title=&quot;${title}&quot; class=&quot;k-youtube-popup&quot;&gt;
+              &lt;img height=&quot;90&quot; width=&quot;120&quot; src=&quot;${thumbnail.sqDefault}&quot; alt=&quot;thumbnail&quot;/&gt;
+          &lt;/a&gt;
+      &lt;/div&gt;
+      &lt;div style=&quot;margin-left: 130px; height: 90px;&quot;&gt;
+          &lt;h4 style=&quot;margin: 2px&quot;&gt;
+              &lt;a href=&quot;${player.default}&quot; target=&quot;_blank&quot;&gt;${title}&lt;/a&gt;
+          &lt;/h4&gt;
+          &lt;div style=&quot;font-size: .8em&quot;&gt;
+              &lt;p&gt;${description}&lt;/p&gt;
+          &lt;/div&gt;
+      &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/script&gt;
+
+&lt;script type=&quot;text/x-kendo-template&quot; id=&quot;popup&quot;&gt;
+  &lt;iframe width=&#039;640&#039; height=&#039;480&#039; src=&#039;http://www.youtube.com/embed/${data}?rel=0&#039; frameborder=&#039;0&#039;&gt;&lt;/iframe&gt;
+&lt;/script&gt;
+
+// create the popup window for the result
+var win = $("<div></div>").kendoWindow({
+  visible: false,
+  modal: true,
+  deactivate: function(e) {
+   $(this.element).html("");
+  }
+}).data("kendoWindow");
+
+// get the template for the popup
+popupTemplate = kendo.template($("#popup").html());
+
+// attach an event listener to every youtube thumb which will open the popup
+$(".container").on("click", ".k-youtube-popup", function(e) {
+
+  var id = $(e.currentTarget).data("id");
+  var title = $(e.currentTarget).data("title");
+
+  win.content(popupTemplate(id));
+  win.title(title);
+  win.center();
+  win.open();
+
+  e.preventDefault();
+});
+
+$("#youtube_template").kendoYouTube({
+  template: "template"
+});
+  </pre>     
+    <h3>Template Example</h3>
+    <div id="youtube_template"></div>
+  </div>
+</div>

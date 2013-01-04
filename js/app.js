@@ -1,6 +1,23 @@
-angular.module('plugins', []).
-  config(['$routeProvider', function($routeProvider) {
-  $routeProvider.
-      when('/maps', { templateUrl: 'partials/maps/index.html', controller: MapsCtrl }).
-      otherwise({redirectTo: '/'});
-}]);
+define([
+  'jquery',
+  'underscore',
+  'kendo',
+  'backbone',
+  'bootstrap',
+  'mylibs/router/router',
+  'mylibs/views/header/header'
+], function($, _, kendo, Backbone, bootstrap, router, Header){
+  
+  var pub = {};
+
+  pub.init = function() {
+    
+    router.init();  
+  
+    var header = new Header();
+    header.render();
+  };
+
+  return pub;
+
+});

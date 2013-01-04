@@ -1,8 +1,21 @@
-(function ($) {
+// Uses AMD or browser globals to create a jQuery plugin.
 
+// It does not try to register in a CommonJS environment since
+// jQuery is not likely to run in those environments.
+// See jqueryPluginCommonJs.js for that version.
+
+(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['jquery', 'kendo'], factory);
+    } else {
+        // Browser globals
+        factory(window.jQuery, window.kendo);
+    }
+}(function ($, kendo) {
+    
     // shorten references to variables. this is better for uglification 
-    var kendo = window.kendo,
-    ui = kendo.ui,
+    var ui = kendo.ui,
     Widget = ui.Widget,
     CHANGE = "change",
     markers = [],
@@ -219,4 +232,4 @@
 
     ui.plugin(Map);
 
-})(jQuery);
+}));

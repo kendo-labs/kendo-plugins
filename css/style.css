@@ -1,7 +1,3 @@
-body, html {
-	width: 100%;
-}
-
 .map {
 	width: 480px;
 	height: 400px;
@@ -13,13 +9,8 @@ body, html {
 
 .map label { 
   width: auto; display:inline; 
-} 
-
-header {
-	opacity: 0;
 }
 
-#container, header {
-	margin: auto;
-	width: 1000px;
+#container {
+	padding-top: 50px;
 }
