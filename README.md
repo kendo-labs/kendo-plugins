@@ -6,18 +6,25 @@ Kendo Plugins is a library of third party widgets and controls written for Kendo
 
 ## Compatibility and Requirements
 
-Kendo Plugins depend on **AT LEAST** the following libraries:
+Kendo Plugins in the Web, Mobile, DataViz and Framework folders depend on the following libraries:
 
-- [jQuery](http://www.jquery.com) v1.8.2
-- [Kendo UI](http://www.kendoui.com) vCurrent
+- [jQuery](http://www.jquery.com) v1.9.1
+- [Kendo UI](http://www.kendoui.com) 2013 Q1
 
-Additionally, some plugins have other required resources
+Additionally, some plugins have other required resources and will be documented in the README.md file for each Plugin.
 
 * **maps:** Requires the [Google Maps API library V3](https://developers.google.com/maps/documentation/javascript/)
 
-Kendo Plugins has not been tested against any other versions of these libraries. You may find that versions other than these are compatible with angular-kendo, but we make no claims to support those version, nor can we troubleshoot issues that arise when using those versions.
+Kendo Plugins for previous versions of Kendo UI and jQuery can be found in the Archive folder.  Troubleshooting will be provided for the current Kendo Plugins.
 
 ## Source Code and Downloads
+
+The Kendo Plugins repository is divided into the following folders:
+* **Archive** - Kendo Plugins for previous versions of Kendo UI.
+* **Web** - Kendo Plugins based on Kendo UI Web for the current version of Kendo UI.
+* **Mobile** - Kendo Plugins based on Kendo UI Mobile for the current version of Kendo UI.
+* **DataViz** - Kendo Plugins based on Kendo UI DataViz for the current version of Kendo UI.
+* **Framework** - Kendo Plugins based on the Kendo UI Framework for the current version of Kendo UI.
 
 Each plugin folder contains a JavaScript file which contains the respective Kendo UI Widget.
 
@@ -47,6 +54,7 @@ For change logs and release notes, see the [changelog](CHANGELOG.md) file.
 
 * 01-APR
  * The repository will be restructured the week of 01-APR.
+ * The [Kendo UI Extended API](https://github.com/jsExtensions/kendoui-extended-api) repository will be moved to the Kendo Plugins repository the week of 01-APR.
  * Kendo UI Plugins repo will be using GitHub Pages to provide documentation for the plugins.  Look for it in April.
 
 ## License Information
