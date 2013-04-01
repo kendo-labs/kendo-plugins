@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>index</title>
+		
+		<link href="http://cdn.kendostatic.com/2013.1.319/styles/kendo.common.min.css" type="text/css" rel="stylesheet" />
+		<link href="http://cdn.kendostatic.com/2013.1.319/styles/kendo.default.min.css" type="text/css" rel="stylesheet" />
+		
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+		<script src="http://cdn.kendostatic.com/2013.1.319/js/kendo.all.min.js"></script>
+		<script src="kendo.repeater.js"></script>	
+		
+		
+	</head>
+
+	<body>
+		
+		<label for="newItem">Enter A New Item</input>
+		<input id="newItem" data-bind="value: newItem" class="k-input" />
+		<button class="k-button" data-bind="click: add">Add Item</button>
+		
+		<div id="repeater"></div>
+		
+		<div data-role="repeater" data-bind="source: items" data-template="template"></div>
+		
+		<script type="text/x-kendo-template" id="template">
+			<div style="color: salmon; margin-right: 10px'"><h1>#= data #</h1></div>
+		</script>
+		
+		<script>
+			
+				var viewModel = kendo.observable({
+					items: [ "item1", "item2", "item3" ],
+					newItem: null,
+					add: function(e) {
+						if (this.get("newItem")) {
+							this.get("items").push(this.get("newItem"))
+						}
+					}
+				})
+			
+				kendo.bind(document.body, viewModel);
+				
+			
+		</script>
+		
+	</body>
+
+</html>

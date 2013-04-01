@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link href="http://cdn.kendostatic.com/2013.1.319/styles/kendo.common.min.css" rel="stylesheet">
+	<link href="http://cdn.kendostatic.com/2013.1.319/styles/kendo.default.min.css" rel="stylesheet">
+	
+	<style>
+		div {
+			width: 500px;
+			margin-bottom: 20px;
+		}
+	</style>
+
+</head>
+<body>
+
+	<h1>Custom Inputs</h1>
+	<p>These widgets change the value of the label when the input changes. Changing the checkbox will toggle the background color.</p>
+
+	<div class="custom-input"></div>
+	<div class="custom-input"></div>
+	<div class="custom-input"></div>
+
+	<h1>Overriden Custom Inputs</h1>
+	<p>These widgets have the exact same base functionality as the ones above, but they also disable the textbox when the checkbox is checked.</p>
+
+	<div class="custom-input-disabled"></div>
+	<div class="custom-input-disabled"></div>
+	<div class="custom-input-disabled"></div>
+
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="http://cdn.kendostatic.com/2013.1.319/js/kendo.all.min.js"></script>
+	<script src="kendo.customInput.js"></script>
+
+	<script>
+
+		(function($, kendo) {
+
+			$(".custom-input").kendoCustomInput({
+				placeholder: "Enter First Name"
+			});
+
+			$(".custom-input-disabled").kendoCustomInputDisable({
+				placeholder: "Enter Last name",
+				toggleColor: "#336699"
+			});
+			
+		})(jQuery, kendo)
+
+	</script>
+
+</body>
+</html>
