@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>Alert Dialog Example</title>
+
+        <link href="http://cdn.kendostatic.com/2013.1.319/styles/kendo.common.min.css" rel="stylesheet" />
+        <link href="http://cdn.kendostatic.com/2013.1.319/styles/kendo.default.min.css" rel="stylesheet" />
+        <link href="kendo.dialogs.css" rel="stylesheet" />
+
+        <style type="text/css">
+            .highlight-section {
+                margin-top: 10px;
+                width: 600px;
+                padding: 7px 7px 7px 7px;
+                min-height: 35px;
+            }
+        </style>
+	</head>
+
+	<body>
+        <h2>Example of the Alert Dialog</h2>
+
+        <h3 id="loading">Loading...</h3>
+
+        <div id="contents" style="display:none;">
+            <div id="selectIconContainer" style="display:block;margin-bottom:20px;">
+                <span>Icon: </span>
+                <select id="selectIcon">
+                    <option value="k-ext-information">Information</option>
+                    <option value="k-ext-question">Question</option>
+                    <option value="k-ext-warning">Warning</option>
+                    <option value="k-ext-error">Error</option>
+                </select>
+            </div>
+            <button id="showAlertDialogButton" class="k-button">Show Alert Dialog</button>
+
+            <div id="userResponse" class="highlight-section k-block" style="margin-top:20px;">
+            </div>
+        </div>
+
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script src="http://cdn.kendostatic.com/2013.1.319/js/kendo.all.min.js"></script>
+        <script src="http://demos.kendoui.com/content/shared/js/people.js"></script>
+		<script src="kendo.dialogs.js"></script>	
+
+        <script>
+            $(function () {
+                var selectIcon = $("#selectIcon").kendoDropDownList().data("kendoDropDownList");
+
+                var $button = $("#showAlertDialogButton");
+
+                $button.on('click', function () {
+                    $.when(kendo.ui.AlertDialog.show({ title: "Alert!", message: "This is a sample alert box", icon: selectIcon.value() })).done(function () {
+                        $("#userResponse").append(kendo.format("<div>OK button clicked at: {0}</div>", new Date().toLocaleTimeString()));
+                    });
+                });
+
+                $("#loading").hide();
+                $("#contents").show();
+            });
+        </script>
+    </body>
+</html>

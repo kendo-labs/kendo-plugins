@@ -1,0 +1,35 @@
+.k-ext-information, .k-ext-question, .k-ext-warning, .k-ext-error {
+	overflow: hidden;
+	width: 32px;
+	height: 32px;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-image: url('./Images/medium-sprites.png');
+	margin: 0;
+}
+
+.k-ext-information {
+	background-position: 0 0;
+}
+
+.k-ext-question {
+	background-position: -32px 0;
+}
+
+.k-ext-warning {
+	background-position: -64px 0;
+}
+
+.k-ext-error {
+	background-position: -96px 0;
+}
+
+.k-ext-wait {
+	overflow: hidden;
+	width: 30px;
+	height: 30px;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-image: url('./Images/medium-wait.gif');
+	margin: 0;
+}
