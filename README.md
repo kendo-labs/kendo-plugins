@@ -43,6 +43,12 @@ As a part of Kendo UI Labs, Kendo Plugins are intended to be a community-run pro
 
 For change logs and release notes, see the [changelog](CHANGELOG.md) file.
 
+## Announcements
+
+* 01-APR
+ * The repository will be restructured the week of 01-APR.
+ * Kendo UI Plugins repo will be using GitHub Pages to provide documentation for the plugins.  Look for it in April.
+
 ## MIT License
 
 Copyright © 2013 Telerik
