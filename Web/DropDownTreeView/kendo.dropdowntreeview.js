@@ -1,22 +1,21 @@
+/// <version>2013.04.14</version>
+/// <summary>Works with the Kendo UI 2013 Q1 and jQuery 1.9.1</summary>
+
 (function (kendo, $) {
-    var DropDownTreeView = kendo.ui.Widget.extend({
-        /// <signature>
-        ///   <summary>
-        ///   Combine the DropDownList and TreeView widgets to create a DropDownTreeView widget.
-        ///   </summary>
-        ///   <author>John DeVight</author>
-        /// </signature>
+    var ExtDropDownTreeView = kendo.ui.Widget.extend({
+        /// <summary>
+        /// Combine the DropDownList and TreeView widgets to create a DropDownTreeView widget.
+        /// </summary>
+        /// <author>John DeVight</author>
 
         _uid: null,
         _treeview: null,
         _dropdown: null,
 
         init: function (element, options) {
-            /// <signature>
-            ///   <summary>
-            ///   Initialize the widget.
-            ///   </summary>
-            /// </signature>
+            /// <summary>
+            /// Initialize the widget.
+            /// </summary>
 
             var that = this;
 
@@ -29,20 +28,23 @@
             $(element).append(kendo.format("<input id='extDropDown{0}' class='k-ext-dropdown'/>", that._uid));
             $(element).append(kendo.format("<div id='extTreeView{0}' class='k-ext-treeview' style='z-index:1;'/>", that._uid));
 
-            // Create the DropDownList.
+            // Create the dropdown.
             that._dropdown = $(kendo.format("#extDropDown{0}", that._uid)).kendoDropDownList({
                 dataSource: [{ text: "", value: "" }],
                 dataTextField: "text",
                 dataValueField: "value",
                 open: function (e) {
-                    // If the TreeView is not visible, then make it visible.
+                    //to prevent the dropdown from opening or closing. A bug was found when clicking on the dropdown to 
+                    //"close" it. The default dropdown was visible after the treeview had closed.
+                    e.preventDefault();
+                    // If the treeview is not visible, then make it visible.
                     if (!$treeviewRootElem.hasClass("k-custom-visible")) {
-                        // Position the TreeView so that it is below the dropdown.
+                        // Position the treeview so that it is below the dropdown.
                         $treeviewRootElem.css({
                             "top": $dropdownRootElem.position().top + $dropdownRootElem.height(),
                             "left": $dropdownRootElem.position().left
                         });
-                        // Display the TreeView.
+                        // Display the treeview.
                         $treeviewRootElem.slideToggle('fast', function () {
                             that._dropdown.close();
                             $treeviewRootElem.addClass("k-custom-visible");
@@ -58,10 +60,10 @@
 
             var $dropdownRootElem = $(that._dropdown.element).closest("span.k-dropdown");
 
-            // Create the TreeView.
+            // Create the treeview.
             that._treeview = $(kendo.format("#extTreeView{0}", that._uid)).kendoTreeView(options.treeview).data("kendoTreeView");
             that._treeview.bind("select", function (e) {
-                // When a node is selected, display the text for the node in the DropDownList and hide the TreeView.
+                // When a node is selected, display the text for the node in the dropdown and hide the treeview.
                 $dropdownRootElem.find("span.k-input").text($(e.node).children("div").text());
                 $treeviewRootElem.slideToggle('fast', function () {
                     $treeviewRootElem.removeClass("k-custom-visible");
@@ -71,7 +73,7 @@
 
             var $treeviewRootElem = $(that._treeview.element).closest("div.k-treeview");
 
-            // Hide the TreeView.
+            // Hide the treeview.
             $treeviewRootElem
                 .width($dropdownRootElem.width())
                 .css({
@@ -82,9 +84,9 @@
                 });
 
             $(document).click(function (e) {
-                // Ignore clicks on the TreeView.
+                // Ignore clicks on the treetriew.
                 if ($(e.target).closest("div.k-treeview").length == 0) {
-                    // If visible, then close the TreeView.
+                    // If visible, then close the treeview.
                     if ($treeviewRootElem.hasClass("k-custom-visible")) {
                         $treeviewRootElem.slideToggle('fast', function () {
                             $treeviewRootElem.removeClass("k-custom-visible");
@@ -95,29 +97,24 @@
         },
 
         dropDownList: function () {
-            /// <signature>
-            ///   <summary>
-            ///   Return a reference to the DropDownList widget.
-            ///   </summary>
-            /// </signature>
+            /// <summary>
+            /// Return a reference to the DropDownList widget.
+            /// </summary>
 
             return this._dropdown;
         },
 
         treeview: function () {
-            /// <signature>
-            ///   <summary>
-            ///   Return a reference to the TreeView widget.
-            ///   </summary>
-            /// </signature>
+            /// <summary>
+            /// Return a reference to the TreeView widget.
+            /// </summary>
 
             return this._treeview;
         },
 
         options: {
-            name: "DropDownTreeView"
+            name: "ExtDropDownTreeView"
         }
     });
-    kendo.ui.plugin(DropDownTreeView);
-
+    kendo.ui.plugin(ExtDropDownTreeView);
 })(window.kendo, window.kendo.jQuery);

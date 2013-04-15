@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-		<title>Alert Dialog Example</title>
+		<title>Yes/No Dialog Example</title>
 
         <link href="http://cdn.kendostatic.com/2013.1.319/styles/kendo.common.min.css" rel="stylesheet" />
         <link href="http://cdn.kendostatic.com/2013.1.319/styles/kendo.default.min.css" rel="stylesheet" />
@@ -20,7 +20,7 @@
 	</head>
 
 	<body>
-        <h2>Example of the Alert Dialog</h2>
+        <h2>Example of the Yes/No Dialog</h2>
 
         <h3 id="loading">Loading...</h3>
 
@@ -34,7 +34,7 @@
                     <option value="k-ext-error">Error</option>
                 </select>
             </div>
-            <button id="showAlertDialogButton" class="k-button">Show Alert Dialog</button>
+            <button id="showDialogButton" class="k-button">Show Yes/No Dialog</button>
 
             <div id="userResponse" class="highlight-section k-block" style="margin-top:20px;">
             </div>
@@ -48,11 +48,9 @@
             $(function () {
                 var selectIcon = $("#selectIcon").kendoDropDownList().data("kendoDropDownList");
 
-                var $button = $("#showAlertDialogButton");
-
-                $button.on('click', function () {
-                    $.when(kendo.ui.ExtAlertDialog.show({ title: "Alert!", message: "This is a sample alert box", icon: selectIcon.value() })).done(function () {
-                        $("#userResponse").append(kendo.format("<div>OK button clicked at: {0}</div>", new Date().toLocaleTimeString()));
+                $("#showDialogButton").on("click", function () {
+                    $.when(kendo.ui.ExtYesNoDialog.show({ title: "Yes/No", message: "This is a sample yes/no box", icon: selectIcon.value() })).done(function (response) {
+                        $("#userResponse").append(kendo.format("<div>{0} button clicked at: {1}</div>", response.button, new Date().toLocaleTimeString()));
                     });
                 });
 

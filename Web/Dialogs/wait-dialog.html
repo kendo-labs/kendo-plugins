@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>Input Wait Example</title>
+
+        <link href="http://cdn.kendostatic.com/2013.1.319/styles/kendo.common.min.css" rel="stylesheet" />
+        <link href="http://cdn.kendostatic.com/2013.1.319/styles/kendo.default.min.css" rel="stylesheet" />
+        <link href="kendo.dialogs.css" rel="stylesheet" />
+	</head>
+
+	<body>
+        <h2>Example of the Wait Dialog</h2>
+
+        <h3 id="loading">Loading...</h3>
+
+        <div id="contents" style="display:none;">
+            <button id="showDialogButton" class="k-button">Show Wait Dialog for 5 seconds</button>
+        </div>
+
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script src="http://cdn.kendostatic.com/2013.1.319/js/kendo.all.min.js"></script>
+		<script src="kendo.dialogs.js"></script>	
+
+        <script>
+            $(function () {
+                $("#showDialogButton").on("click", function () {
+                    $.when(kendo.ui.ExtWaitDialog.show({ title: "Wait", message: "Waiting for 5 seconds..." })).done(function () {
+                        setTimeout(function () {
+                            kendo.ui.ExtWaitDialog.hide();
+                        }, 5000);
+                    });
+                });
+
+                $("#loading").hide();
+                $("#contents").show();
+            });
+        </script>
+    </body>
+</html>

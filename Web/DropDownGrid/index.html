@@ -41,7 +41,7 @@
         <script>
             $(function () {
                 // Initialize the DropDownGrid.
-                var dropDownGrid = $("#dropDownGrid").kendoDropDownGrid({
+                var dropDownGrid = $("#dropDownGrid").kendoExtDropDownGrid({
                     dataTextField: "FirstName",
                     dropDownWidth: "100px",
                     gridWidth: "700px",
@@ -95,7 +95,7 @@
                         selectable: true,
                         filterable: true
                     }
-                }).data("kendoDropDownGrid");
+                }).data("kendoExtDropDownGrid");
 
                 dropDownGrid.bind("change", function () {
                     var selectedRows = this.grid().select();

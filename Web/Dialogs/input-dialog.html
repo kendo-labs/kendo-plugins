@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-		<title>Alert Dialog Example</title>
+		<title>Input Dialog Example</title>
 
         <link href="http://cdn.kendostatic.com/2013.1.319/styles/kendo.common.min.css" rel="stylesheet" />
         <link href="http://cdn.kendostatic.com/2013.1.319/styles/kendo.default.min.css" rel="stylesheet" />
@@ -20,21 +20,12 @@
 	</head>
 
 	<body>
-        <h2>Example of the Alert Dialog</h2>
+        <h2>Example of the Input Dialog</h2>
 
         <h3 id="loading">Loading...</h3>
 
         <div id="contents" style="display:none;">
-            <div id="selectIconContainer" style="display:block;margin-bottom:20px;">
-                <span>Icon: </span>
-                <select id="selectIcon">
-                    <option value="k-ext-information">Information</option>
-                    <option value="k-ext-question">Question</option>
-                    <option value="k-ext-warning">Warning</option>
-                    <option value="k-ext-error">Error</option>
-                </select>
-            </div>
-            <button id="showAlertDialogButton" class="k-button">Show Alert Dialog</button>
+            <button id="showDialogButton" class="k-button">Show Input Dialog</button>
 
             <div id="userResponse" class="highlight-section k-block" style="margin-top:20px;">
             </div>
@@ -46,13 +37,13 @@
 
         <script>
             $(function () {
-                var selectIcon = $("#selectIcon").kendoDropDownList().data("kendoDropDownList");
-
-                var $button = $("#showAlertDialogButton");
-
-                $button.on('click', function () {
-                    $.when(kendo.ui.ExtAlertDialog.show({ title: "Alert!", message: "This is a sample alert box", icon: selectIcon.value() })).done(function () {
-                        $("#userResponse").append(kendo.format("<div>OK button clicked at: {0}</div>", new Date().toLocaleTimeString()));
+                $("#showDialogButton").on("click", function () {
+                    $.when(kendo.ui.ExtInputDialog.show({ title: "Input", message: "Please enter your name:", required: true })).done(function (response) {
+                        if (response.button == "OK") {
+                            $("#userResponse").append(kendo.format("<div>{0} button clicked at: {1} with input of: {2}</div>", response.button, new Date().toLocaleTimeString(), response.input));
+                        } else {
+                            $("#userResponse").append(kendo.format("<div>{0} button clicked at: {1}</div>", response.button, new Date().toLocaleTimeString()));
+                        }
                     });
                 });
 

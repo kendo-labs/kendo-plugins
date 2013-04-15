@@ -1,22 +1,21 @@
+/// <version>2013.04.14</version>
+/// <summary>Works with the Kendo UI 2013 Q1 and jQuery 1.9.1</summary>
+
 (function (kendo, $) {
-    var DropDownGrid = kendo.ui.Widget.extend({
-        /// <signature>
-        ///   <summary>
-        ///   Combine the DropDownList and TreeView widgets to create a DropDownTreeView widget.
-        ///   </summary>
-        ///   <author>John DeVight</author>
-        /// </signature>
+    var ExtDropDownGrid = kendo.ui.Widget.extend({
+        /// <summary>
+        /// Combine the DropDownList and TreeView widgets to create a DropDownTreeView widget.
+        /// </summary>
+        /// <author>John DeVight</author>
 
         _uid: null,
         _grid: null,
         _dropdown: null,
 
         init: function (element, options) {
-            /// <signature>
-            ///   <summary>
-            ///   Initialize the widget.
-            ///   </summary>
-            /// </signature>
+            /// <summary>
+            /// Initialize the widget.
+            /// </summary>
 
             var that = this;
 
@@ -59,6 +58,8 @@
                 dataTextField: "text",
                 dataValueField: "value",
                 open: function (e) {
+                    //to prevent the dropdown from opening or closing.
+                    e.preventDefault();
                     // If the grid is not visible, then make it visible.
                     if (!$(that._grid.element).hasClass("k-custom-visible")) {
                         // Position the grid so that it is below the dropdown.
@@ -103,29 +104,24 @@
         },
 
         dropDownList: function () {
-            /// <signature>
-            ///   <summary>
-            ///   Return a reference to the DropDownList widget.
-            ///   </summary>
-            /// </signature>
+            /// <summary>
+            /// Return a reference to the DropDownList widget.
+            /// </summary>
 
             return this._dropdown;
         },
 
         grid: function () {
-            /// <signature>
-            ///   <summary>
-            ///   Return a reference to the Grid widget.
-            ///   </summary>
-            /// </signature>
+            /// <summary>
+            /// Return a reference to the Grid widget.
+            /// </summary>
 
             return this._grid;
         },
 
         options: {
-            name: "DropDownGrid"
+            name: "ExtDropDownGrid"
         }
     });
-    kendo.ui.plugin(DropDownGrid);
-
+    kendo.ui.plugin(ExtDropDownGrid);
 })(window.kendo, window.kendo.jQuery);
