@@ -1,9 +1,13 @@
-﻿/// <version>2013.04.14</version>
+/// <version>2013.04.14</version>
 /// <summary>Works with the Kendo UI 2013 Q1 and jQuery 1.9.1</summary>
 
 (function (kendo, $) {
     var ExtContextMenu = kendo.ui.Menu.extend({
         _itemTemplate: kendo.template("<li># if (iconCss.length > 0) { #<span class=' #=iconCss # k-icon'></span># } # #= text #</li>"),
+
+        enableScreenDetection: true,
+        offsetY: 0,
+        offsetX: 0,
 
         init: function (element, options) {
             var that = this;
@@ -67,10 +71,32 @@
         show: function (left, top) {
             var that = this;
 
+            //determine if off screen
+            var eleHeight = $(that.element).height();
+            var eleWidth = $(that.element).width();
+            var xPos = left + that.offsetX;
+            var yPos = top + that.offsetY;
+
+            if (that.enableScreenDetection) {
+                if (
+                    (eleWidth + xPos) > window.innerWidth ||
+                    (eleHeight + yPos) > window.innerHeight
+                    ) {
+                    //off screen detected, need to ignore off set settings and mouse position and position to fix the menu
+                    if ((eleWidth + xPos) > window.innerWidth) {
+                        xPos = window.innerWidth - eleWidth - 3;
+                    }
+                    if ((eleHeight + yPos) > window.innerHeight) {
+                        yPos = window.innerHeight - eleHeight - 3;
+                    }
+                }
+
+            }
+
             // Position the context menu.
             $(that.element).css({
-                "top": top,
-                "left": left
+                "top": yPos,
+                "left": xPos
             });
             // Display the context menu.
             $(that.element).slideToggle('fast', function () {
