@@ -2,6 +2,7 @@
 /// <summary>Works with the Kendo UI 2013 Q1 and jQuery 1.9.1</summary>
 
 (function (kendo, $) {
+
     var ExtContextMenu = kendo.ui.Menu.extend({
         _itemTemplate: kendo.template("<li># if (iconCss.length > 0) { #<span class=' #=iconCss # k-icon'></span># } # #= text #</li>"),
         _itemTemplateInnerContent: kendo.template("# if (iconCss.length > 0) { #<span class=' #=iconCss # k-icon'></span># } # #= text #"), 
@@ -56,7 +57,7 @@
             if(options.targets){
 
                 // When the user right-clicks on any of the targets, then display the context menu.
-                $(document).on("contextmenu", options.targets, function (e) {
+                $(document).on(that.options.event, options.targets, function (e) {
                     e.preventDefault();
                     that.trigger("beforeopen", e);
                     that._currentTarget = e.currentTarget;
@@ -150,9 +151,33 @@
             
         },
 
+        _getSelectedDataItem: function (e) {
+            //http://www.kendoui.com/forums/ui/menu/accessing-the-original-menu-item-object-during-select-event.aspx
+            //http://jsfiddle.net/bundyo/MMRCf/4/light/
+            var that = this;
+
+            var item = $(e.item),
+                menuElement = item.closest(".k-menu"),
+                dataItem = that.options.dataSource,
+                index = item.parentsUntil(menuElement, ".k-item").map(function () {
+                    return $(this).index();
+                }).get().reverse();
+
+            index.push(item.index());
+
+            for (var i = -1, len = index.length; ++i < len;) {
+                dataItem = dataItem[index[i]];
+                dataItem = i < len - 1 ? dataItem.items : dataItem;
+            }
+
+            return dataItem;
+        },
         _select: function (e) {
             if (this.options.itemSelect != undefined) {
+
                 e.target = this._currentTarget;
+                e.dataItem = this._getSelectedDataItem(e);
+
                 this.options.itemSelect.apply(this, [e]);
             }
             this.hide();
