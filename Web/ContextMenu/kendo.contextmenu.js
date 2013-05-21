@@ -85,8 +85,8 @@
             $(that.element).css({ "width": that.options.width, "position": "absolute" }).addClass("k-block").addClass("k-ext-contextmenu");
 
             // If the user is not clicking on the context menu, then hide the menu.
-             $(document).on("click", function (e) {
-                 // Ignore clicks on the contextmenu.
+            $(document).on("click", function (e) {
+                // Ignore clicks on the contextmenu.
                 if ($(e.target).closest(".k-ext-contextmenu").length == 0) {
                     // If visible, then close the contextmenu.
                     that.hide();
@@ -112,10 +112,10 @@
                         ) {
                         //off screen detected, need to ignore off set settings and mouse position and position to fix the menu
                         if ((eleWidth + xPos) > window.innerWidth) {
-                            xPos = window.innerWidth - eleWidth - 3;
+                            xPos = window.innerWidth - eleWidth - 1;
                         }
                         if ((eleHeight + yPos) > window.innerHeight) {
-                            yPos = window.innerHeight - eleHeight - 3;
+                            yPos = window.innerHeight - eleHeight - 1;
                         }
                     }
 
@@ -127,7 +127,7 @@
                     "left": xPos
                 });
                 // Display the context menu.
-                $(that.element).slideToggle('fast', function () {
+                $(that.element).fadeIn(function () {
                     that.shown = true;
                     $(that.element).addClass("k-custom-visible");
                 });
@@ -141,7 +141,7 @@
             if (that.shown && !that.cancelHide) {
                 that.hiding = true;
 
-                $(that.element).slideToggle('fast', function () {
+                $(that.element).fadeOut(function () {
                     that.hiding = false;
                     that.shown = false;
                     $(that.element).removeClass("k-custom-visible");
