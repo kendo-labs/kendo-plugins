@@ -86,12 +86,10 @@
 
             // If the user is not clicking on the context menu, then hide the menu.
              $(document).on("click", function (e) {
-                // Ignore clicks on the contextmenu.
+                 // Ignore clicks on the contextmenu.
                 if ($(e.target).closest(".k-ext-contextmenu").length == 0) {
                     // If visible, then close the contextmenu.
-                    if ($(that.element).hasClass("k-custom-visible")) {
-                        that.hide();
-                    }
+                    that.hide();
                 }
             });
         },
