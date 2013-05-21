@@ -85,7 +85,7 @@
             $(that.element).css({ "width": that.options.width, "position": "absolute" }).addClass("k-block").addClass("k-ext-contextmenu");
 
             // If the user is not clicking on the context menu, then hide the menu.
-            $(document).click(function (e) {
+             $(document).on("click", function (e) {
                 // Ignore clicks on the contextmenu.
                 if ($(e.target).closest(".k-ext-contextmenu").length == 0) {
                     // If visible, then close the contextmenu.
