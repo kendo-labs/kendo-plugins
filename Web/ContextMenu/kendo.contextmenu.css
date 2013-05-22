@@ -1,0 +1,20 @@
+.k-ext-contextmenu li
+{
+    display:block;
+    width: 100%;
+}
+    .k-ext-contextmenu li .k-link
+    {
+        width: 100%;
+    }
+
+.k-ext-contextmenu li.k-ext-menu-separator
+{
+    border-bottom-style: solid;
+    border-bottom-width: 1px !important;
+    height: 1px;
+}
+    .k-ext-contextmenu li.k-ext-menu-separator *
+    {
+        display:none;
+    }
