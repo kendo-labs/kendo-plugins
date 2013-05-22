@@ -1,51 +1,69 @@
-/// <version>2013.04.14</version>
+﻿/// <version>2013.05.22</version>
 /// <summary>Works with the Kendo UI 2013 Q1 and jQuery 1.9.1</summary>
 
 (function (kendo, $) {
-
     var ExtContextMenu = kendo.ui.Menu.extend({
+        /// <summary>
+        /// Context menu widget.
+        /// <summary>
+        /// <remarks>
+        /// items will be deprecated in version: Kendo UI 2014 Q1.  Use dataSource instead.
+        /// </remarks>
+
+        // Remove in version Kendo UI 2014 Q1.
         _itemTemplate: kendo.template("<li># if (iconCss.length > 0) { #<span class=' #=iconCss # k-icon'></span># } # #= text #</li>"),
-        _itemTemplateInnerContent: kendo.template("# if (iconCss.length > 0) { #<span class=' #=iconCss # k-icon'></span># } # #= text #"), 
 
         hiding: false,
         shown: false,
         cancelHide: false,
 
-        options:  {
-                orientation: "vertical",
-                name: "ExtContextMenu",
-                width: "100px",
-                enableScreenDetection: true,
-                delay: 1000,
-                event: 'contextmenu',
-                offsetY: 0,
-                offsetX: 0,
-                closeOnClick: true
-            },
+        options: {
+            orientation: "vertical",
+            name: "ExtContextMenu",
+            width: "100px",
+            enableScreenDetection: true,
+            delay: 1000,
+            event: 'contextmenu',
+            offsetY: 0,
+            offsetX: 0,
+            animation: {
+                close: {
+                    effects: "slide"
+                },
+                open: {
+                    effects: "slide"
+                }
+            }
+        },
 
         init: function (element, options) {
             var that = this;
 
             $(element).appendTo("body").hide();
-            
+
             // If the list of items has been passed in...
             if (options.dataSource) {
+                // Handle any separators defined in the datasource.
                 $.each(options.dataSource, function (idx, item) {
-
                     if (item.separator) {
                         item.cssClass = "k-ext-menu-separator";
                         item.text = "";
                         item.content = "";
                     }
-
-                    //var html = "";
-                    //if (item.separator) {
-                    //    html = "<li class='k-ext-menu-separator'><li>";
-                    //} else {
-                    //    item = $.extend({ iconCss: "" }, item);
-                    //    html = that._itemTemplate(item);
-                    //}
-                    //$(element).append(html);
+                });
+            } else if (options.items) {
+                // Process the list of items passed in.
+                $.each(options.items, function (idx, item) {
+                    var html = "";
+                    if (item.separator) {
+                        item.cssClass = "k-ext-menu-separator";
+                        item.text = "";
+                        item.content = "";
+                    } else {
+                        item = $.extend({ iconCss: "" }, item);
+                        html = that._itemTemplate(item);
+                    }
+                    $(element).append(html);
                 });
             }
 
@@ -55,7 +73,7 @@
             // If there are any separators, then remove the k-link class.
             $(that.element).find("li.k-ext-menu-separator span").removeClass("k-link");
 
-            if(options.targets){
+            if (options.targets) {
 
                 // When the user right-clicks on any of the targets, then display the context menu.
                 $(document).on(that.options.event, options.targets, function (e) {
@@ -73,6 +91,7 @@
                 delay = options.delay || that.options.delay;
                 setTimeout(function () { that.hide() }, delay);
             });
+
             $(that.element).on('mouseenter', function () {
 
                 that.cancelHide = true;
@@ -97,17 +116,24 @@
         },
 
         show: function (left, top) {
+            /// <summary>
+            /// Show the context menu.
+            /// <summary>
+            /// <param name="left" type="int">x coordinate to show the context menu</param>
+            /// <param name="top" type="int">y coordinate to show the context menu</param>
+
             var that = this;
 
             if (!this.hiding) {
 
                 //determine if off screen
-                var eleHeight = $(that.element).height();
-                var eleWidth = $(that.element).width();
                 var xPos = left + that.options.offsetX;
                 var yPos = top + that.options.offsetY;
 
                 if (that.options.enableScreenDetection) {
+                    var eleHeight = $(that.element).height();
+                    var eleWidth = $(that.element).width();
+
                     if (
                         (eleWidth + xPos) > window.innerWidth ||
                         (eleHeight + yPos) > window.innerHeight
@@ -120,7 +146,6 @@
                             yPos = window.innerHeight - eleHeight - 1;
                         }
                     }
-
                 }
 
                 // Position the context menu.
@@ -128,38 +153,60 @@
                     "top": yPos,
                     "left": xPos
                 });
+
                 // Display the context menu.
-                $(that.element).fadeIn(function () {
-                    that.shown = true;
-                    $(that.element).addClass("k-custom-visible");
-                });
+                if (that.options.animation.open.effects == "fade") {
+                    $(that.element).fadeIn(function () {
+                        that.shown = true;
+                        $(that.element).addClass("k-custom-visible");
+                    });
+                } else if (that.options.animation.open.effects == "slide") {
+                    $(that.element).slideToggle('fast', function () {
+                        that.shown = true;
+                        $(that.element).addClass("k-custom-visible");
+                    });
+                }
             }
-            
+
         },
 
         hide: function () {
+            /// <summary>
+            /// Hide the context menu.
+            /// <summary>
+
             var that = this;
 
             if (that.shown && !that.cancelHide) {
-                that._forceHide();
-            }
-            
-        },
-        _forceHide: function () {
-            var that = this;
-            
-            that.hiding = true;
+                that.hiding = true;
 
-            $(that.element).fadeOut(function () {
-                that.hiding = false;
-                that.shown = false;
-                $(that.element).removeClass("k-custom-visible");
-            });
+                // Hide the context menu.
+                if (that.options.animation.close.effects == "fade") {
+                    $(that.element).fadeOut(function () {
+                        that.hiding = false;
+                        that.shown = false;
+                        $(that.element).removeClass("k-custom-visible");
+                    });
+                } else if (that.options.animation.close.effects == "slide") {
+                    $(that.element).slideToggle('fast', function () {
+                        that.hiding = false;
+                        that.shown = false;
+                        $(that.element).removeClass("k-custom-visible");
+                    });
+                }
+            }
         },
 
         _getSelectedDataItem: function (e) {
-            //http://www.kendoui.com/forums/ui/menu/accessing-the-original-menu-item-object-during-select-event.aspx
-            //http://jsfiddle.net/bundyo/MMRCf/4/light/
+            /// <summary>
+            /// Get the selected data item.
+            /// <summary>
+            /// <remarks>
+            /// The following websites were referenced:
+            /// - http://www.kendoui.com/forums/ui/menu/accessing-the-original-menu-item-object-during-select-event.aspx
+            /// - http://jsfiddle.net/bundyo/MMRCf/4/light/
+            /// </remarks>
+
             var that = this;
 
             var item = $(e.item),
@@ -178,19 +225,25 @@
 
             return dataItem;
         },
+
         _select: function (e) {
+            /// <summary>
+            /// A context menu item has been selected.
+            /// <summary>
+
             if (this.options.itemSelect != undefined) {
 
                 e.target = this._currentTarget;
-                e.dataItem = this._getSelectedDataItem(e);
+                e.dataItem = that.options.dataSource ? this._getSelectedDataItem(e) : undefined;
 
                 this.options.itemSelect.apply(this, [e]);
             }
-
+			
             if (this.options.closeOnClick == true)
             {
                 this._forceHide();
             }
+            this.hide();
         },
     });
     kendo.ui.plugin(ExtContextMenu);
