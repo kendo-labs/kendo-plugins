@@ -20,6 +20,7 @@
                 event: 'contextmenu',
                 offsetY: 0,
                 offsetX: 0,
+                closeOnClick: true
             },
 
         init: function (element, options) {
@@ -140,15 +141,20 @@
             var that = this;
 
             if (that.shown && !that.cancelHide) {
-                that.hiding = true;
-
-                $(that.element).fadeOut(function () {
-                    that.hiding = false;
-                    that.shown = false;
-                    $(that.element).removeClass("k-custom-visible");
-                });
+                that._forceHide();
             }
             
+        },
+        _forceHide: function () {
+            var that = this;
+            
+            that.hiding = true;
+
+            $(that.element).fadeOut(function () {
+                that.hiding = false;
+                that.shown = false;
+                $(that.element).removeClass("k-custom-visible");
+            });
         },
 
         _getSelectedDataItem: function (e) {
@@ -180,7 +186,11 @@
 
                 this.options.itemSelect.apply(this, [e]);
             }
-            this.hide();
+
+            if (this.options.closeOnClick == true)
+            {
+                this._forceHide();
+            }
         },
     });
     kendo.ui.plugin(ExtContextMenu);
