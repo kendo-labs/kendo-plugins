@@ -1,4 +1,4 @@
-﻿/// <version>2013.05.22</version>
+﻿/// <version>2013.05.24</version>
 /// <summary>Works with the Kendo UI 2013 Q1 and jQuery 1.9.1</summary>
 
 (function (kendo, $) {
@@ -26,6 +26,7 @@
             event: 'contextmenu',
             offsetY: 0,
             offsetX: 0,
+            closeOnClick: true,
             animation: {
                 close: {
                     effects: "slide"
@@ -180,20 +181,28 @@
             if (that.shown && !that.cancelHide) {
                 that.hiding = true;
 
-                // Hide the context menu.
-                if (that.options.animation.close.effects == "fade") {
-                    $(that.element).fadeOut(function () {
-                        that.hiding = false;
-                        that.shown = false;
-                        $(that.element).removeClass("k-custom-visible");
-                    });
-                } else if (that.options.animation.close.effects == "slide") {
-                    $(that.element).slideToggle('fast', function () {
-                        that.hiding = false;
-                        that.shown = false;
-                        $(that.element).removeClass("k-custom-visible");
-                    });
-                }
+                that._forceHide();
+            }
+        },
+
+        _forceHide: function () {
+            var that = this;
+
+            that.hiding = true;
+
+            // Hide the context menu.
+            if (that.options.animation.close.effects == "fade") {
+                $(that.element).fadeOut(function () {
+                    that.hiding = false;
+                    that.shown = false;
+                    $(that.element).removeClass("k-custom-visible");
+                });
+            } else if (that.options.animation.close.effects == "slide") {
+                $(that.element).slideToggle('fast', function () {
+                    that.hiding = false;
+                    that.shown = false;
+                    $(that.element).removeClass("k-custom-visible");
+                });
             }
         },
 
@@ -231,17 +240,19 @@
             /// A context menu item has been selected.
             /// <summary>
 
+            var that = this;
+
             if (this.options.itemSelect != undefined) {
 
-                e.target = this._currentTarget;
-                e.dataItem = that.options.dataSource ? this._getSelectedDataItem(e) : undefined;
+                e.target = that._currentTarget;
+                e.dataItem = that.options.dataSource ? that._getSelectedDataItem(e) : undefined;
 
-                this.options.itemSelect.apply(this, [e]);
+                that.options.itemSelect.apply(that, [e]);
             }
 			
-            if (this.options.closeOnClick == true)
+            if (that.options.closeOnClick == true)
             {
-                this._forceHide();
+                that._forceHide();
             }
             this.hide();
         },
