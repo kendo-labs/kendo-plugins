@@ -1,4 +1,4 @@
-﻿/// <version>2013.05.22</version>
+/// <version>2013.05.22</version>
 /// <summary>Works with the Kendo UI 2013 Q1 and jQuery 1.9.1</summary>
 
 (function (kendo, $) {
@@ -231,6 +231,8 @@
             /// A context menu item has been selected.
             /// <summary>
 
+            var that = this;
+
             if (this.options.itemSelect != undefined) {
 
                 e.target = this._currentTarget;
@@ -239,10 +241,6 @@
                 this.options.itemSelect.apply(this, [e]);
             }
 			
-            if (this.options.closeOnClick == true)
-            {
-                this._forceHide();
-            }
             this.hide();
         },
     });
