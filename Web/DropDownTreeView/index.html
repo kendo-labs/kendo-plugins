@@ -40,7 +40,7 @@
         <script>
             $(function () {
                 // Initialize the DropDownTreeView.
-                var dropDownTreeView = $("#dropDownTreeView").kendoDropDownTreeView({
+                var dropDownTreeView = $("#dropDownTreeView").kendoExtDropDownTreeView({
                     treeview: {
                         dataSource: new kendo.data.HierarchicalDataSource({
                             data: [
@@ -61,7 +61,7 @@
                             ]
                         })
                     }
-                }).data("kendoDropDownTreeView");
+                }).data("kendoExtDropDownTreeView");
 
                 // Expand all items.
                 dropDownTreeView.treeview().expand(".k-item");
