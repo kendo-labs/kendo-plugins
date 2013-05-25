@@ -1,0 +1,78 @@
+.km-listview-index
+{
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1010;
+    margin: 0 5px 0 0;
+    padding: 10px 0;
+    list-style-type: none;
+    font-size: 8px;
+    font-weight: bold;
+    border-radius: 14px;
+}
+.km-android .km-listview-index
+{
+    color: #999;
+}
+.km-ios .km-listview-index
+{
+    color: rgb(109, 114, 120);
+}
+
+.km-listview-index li {
+    padding: 0px 10px;
+    text-align: center;
+}
+
+.km-android .km-listview-index.km-ontouch
+{
+    background-color: rgba(255,255,255,.4);
+}
+.km-ios .km-listview-index.km-ontouch
+{
+    background-color: rgba(137,145,148,.7);
+}
+
+.km-listview-index-card
+{
+    display: none;
+    position: absolute;
+    top:0;
+    left:0;
+    width: 2em;
+    height: 2em;
+    padding-top: 1em;
+    font-size: 1.5em;
+    border: 3px solid #444;
+    color: #444;
+    border-radius: 5px;
+    z-index: 1011;
+    text-align: center;
+    background-color: #ddd;
+}
+
+    .km-listview-index-card:after {
+        content: "";
+        position: absolute;
+        top: -2px;
+        right: -32px;
+        border-style: solid;
+        border-width: 31px 0 31px 31px;
+        border-color: transparent #444;
+        display: block;
+        width: 0;
+        z-index: 1;
+    }
+
+        /*.km-android .km-listview-index-card:after {
+            border-width: 33px 0 33px 33px;
+            top: -1px;
+            right: -34px;
+        }*/
+
+.km-root .km-indexedlistview .km-listview-link:after
+{
+    display: none;
+    border-style: none;
+}
