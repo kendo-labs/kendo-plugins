@@ -1,0 +1,60 @@
+﻿<style type="text/css">
+    .highlight-section {
+        margin-top: 10px;
+        width: 600px;
+        padding: 7px 7px 7px 7px;
+        min-height: 35px;
+    }
+</style>
+
+<h2>Example of the DropDownTreeView widget</h2>
+
+<h3 id="loading">Loading...</h3>
+
+<div id="contents" style="display:none;">
+    <h4>Select an item in the DropDownTreeView</h4>
+    <div id="dropDownTreeView">
+    </div>
+
+    <h4>List of items selected in the DropDownTreeView</h4>
+    <div id="userSelection" class="highlight-section k-block">
+    </div>
+</div>
+
+<script>
+    $(function () {
+        // Initialize the DropDownTreeView.
+        var dropDownTreeView = $("#dropDownTreeView").kendoExtDropDownTreeView({
+            treeview: {
+                dataSource: new kendo.data.HierarchicalDataSource({
+                    data: [
+                        {
+                            text: "Furniture", items: [
+                                { text: "Tables & Chairs" },
+                                { text: "Sofas" },
+                                { text: "Occasional Furniture" }
+                            ]
+                        },
+                        {
+                            text: "Decor", items: [
+                                { text: "Bed Linen" },
+                                { text: "Curtains & Blinds" },
+                                { text: "Carpets" }
+                            ]
+                        }
+                    ]
+                })
+            }
+        }).data("kendoExtDropDownTreeView");
+
+        // Expand all items.
+        dropDownTreeView.treeview().expand(".k-item");
+
+        dropDownTreeView.bind("select", function (e) {
+            $("#userSelection").prepend(kendo.format("<div>You Selected: {0}</div>", $(e.node).children("div").text()));
+        });
+
+        $("#loading").hide();
+        $("#contents").show();
+    });
+</script>

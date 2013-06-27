@@ -1,0 +1,130 @@
+﻿<style type="text/css">
+    .highlight-section {
+        margin-top: 10px;
+        width: 600px;
+        padding: 7px 7px 7px 7px;
+        min-height: 35px;
+    }
+</style>
+
+<h2>Example of the ContextMenu widget</h2>
+
+<h3 id="loading">Loading...</h3>
+
+<div id="contents" style="display:none;">
+    <p>
+        There are 2 context menus in this example.  The first context menu is displayed when the user
+        right-clicks on the "div" or when the user right-clicks on a "child" item in the TreeView.
+        The second context menu is displayed when the user right-clicks on a "root" item in the 
+        TreeView.
+    </p>
+    <div id="contextMenuTarget" class="k-block" style="font-weight:bold;">Right-click on this div</div>
+    <br />
+    <div style="font-weight:bold;">Right-click on a tree node.</div>
+    <div id="treeview">
+    </div>
+
+    <ul id="itemcontextmenu">
+        <li>
+            <span class="k-edit k-icon"></span>Edit
+        </li>
+        <li class="k-ext-menu-separator">
+            <hr />
+        </li>
+        <li>
+            <span class="k-delete k-icon"></span>Delete
+        </li>
+    </ul>
+
+    <ul id="categorycontextmenu">
+    </ul>
+</div>
+
+<script>
+    $(function () {
+        $("#itemcontextmenu").kendoExtContextMenu({
+            targets: "#contextMenuTarget, #treeview .k-item .furniture, #treeview .k-item .decor",
+            itemSelect: function (e) {
+                var msg = kendo.format('You selected: "{0}" on "{1}"',
+                    $(e.item).text().trim(),
+                    $(e.target).text());
+
+                if (kendo.ui.ExtAlertDialog != undefined) {
+                    kendo.ui.ExtAlertDialog.show({
+                        title: "Selection",
+                        message: msg,
+                        icon: "k-ext-information"
+                    });
+                } else {
+                    alert(msg);
+                }
+            }
+        });
+
+        $("#categorycontextmenu").kendoExtContextMenu({
+            width: "175px",
+            targets: "#treeview .k-item .category",
+            items: [
+                {
+                    text: "Add Item",
+                    iconCss: "k-add"
+                },
+                {
+                    text: "Rename Category",
+                    iconCss: "k-edit"
+                },
+                {
+                    separator: true
+                },
+                {
+                    text: "Delete Category",
+                    iconCss: "k-delete"
+                }
+            ],
+            itemSelect: function (e) {
+                var msg = kendo.format('You selected: "{0}" on "{1}"',
+                    $(e.item).text().trim(),
+                    $(e.target).text());
+
+                if (kendo.ui.ExtAlertDialog != undefined) {
+                    kendo.ui.ExtAlertDialog.show({
+                        title: "Selection",
+                        message: msg,
+                        icon: "k-ext-information"
+                    });
+                } else {
+                    alert(msg);
+                }
+            }
+        });
+
+        var treeview = $("#treeview").kendoTreeView({
+            dataSource: [
+                {
+                    text: "Furniture",
+                    type: "category",
+                    items: [
+                        { text: "Tables & Chairs", type: "furniture" },
+                        { text: "Sofas", type: "furniture" },
+                        { text: "Occasional Furniture", type: "furniture" }
+                    ]
+                },
+                {
+                    text: "Decor",
+                    type: "category",
+                    items: [
+                        { text: "Bed Linen", type: "decor" },
+                        { text: "Curtains & Blinds", type: "decor" },
+                        { text: "Carpets", type: "decor" }
+                    ]
+                }
+            ],
+            template: "<span # if (item.type != undefined) { # class='#= item.type #' # } #>#= item.text #</span>"
+        }).data("kendoTreeView");
+
+        treeview.expand(".k-item");
+
+        $("#loading").hide();
+        $("#contents").show();
+    });
+</script>

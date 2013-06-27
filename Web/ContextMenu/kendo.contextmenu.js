@@ -1,7 +1,7 @@
 ﻿/// <version>2013.05.24</version>
 /// <summary>Works with the Kendo UI 2013 Q1 and jQuery 1.9.1</summary>
 
-(function (kendo, $) {
+(function ($, kendo) {
     var ExtContextMenu = kendo.ui.Menu.extend({
         /// <summary>
         /// Context menu widget.
@@ -258,4 +258,4 @@
         },
     });
     kendo.ui.plugin(ExtContextMenu);
-})(window.kendo, window.kendo.jQuery);
+})(jQuery, window.kendo);

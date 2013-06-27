@@ -1,0 +1,92 @@
+﻿<style>
+    #buttonContainer {
+        margin-top:10px;
+        margin-bottom:10px;
+    }
+
+    #clearGrid {
+        margin-left:10px;
+    }
+</style>
+
+<h2>Empty Messages</h2>
+
+<p>
+    When the grid does not contain any records, a message is displayed.  The default message is "No records to display.".
+    <ol>
+        <li>Click the "Populate Grid" button and the message disappears and the data is displayed.</li>
+        <li>Click the "Clear Grid" button and the data is removed and the message is displayed.</li>
+    </ol>
+</p>
+
+<p>
+    When the grid has data, and a filter is applied that returns no records, a message is displayed.  The default message is
+    "No records to display.".  In the example, the message has been overridden to display "The filter that has been applied has returned nothing."
+    <ol>
+        <li>Click the "Populate Grid" button to populate the grid.</li>
+        <li>Apply a filter for a column that does not match the data in the column.  For example, apply a filter to the "Last Name" column of "Is equal to Test".</li>
+        <li>The message is displayed that "The filter that has been applied has returned nothing."</li>
+        <li>Clear the filter on the column.</li>
+    </ol>
+</p>
+
+<div id="buttonContainer">
+    <button id="populateGrid" class="k-button">Populate Grid</button>
+    <button id="clearGrid" class="k-button">Clear Grid</button>
+</div>
+
+<div id="extgrid"></div>
+
+
+<script>
+    $(function () {
+        $("#populateGrid").on("click", function () {
+            $("#extgrid").data("kendoExtGrid").dataSource.data(createRandomData(25));
+        });
+
+        $("#clearGrid").on("click", function () {
+            $("#extgrid").data("kendoExtGrid").dataSource.data([]);
+        });
+
+        $("#extgrid").kendoExtGrid({
+            dataSource: {
+                data: [],
+                pageSize: 5
+            },
+            columns: [
+                {
+                    field: "FirstName",
+                    title: "First Name",
+                    width: "100px"
+                },{
+                    field: "LastName",
+                    title: "Last Name",
+                    width: 100
+                },{
+                    field: "City",
+                    width: 100
+                },{
+                    field: "Title"
+                },{
+                    field: "BirthDate",
+                    title: "Birth Date",
+                    template: '#= kendo.toString(BirthDate,"MM/dd/yyyy") #',
+                    width: 100
+                },{
+                    field: "Age",
+                    width: 75
+                }
+            ],
+            filterable: true,
+            sortable: true,
+            groupable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true
+            },
+            messages: {
+                filterempty: "The filter that has been applied has returned nothing."
+            }
+        });
+    });
+</script>

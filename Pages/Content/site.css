@@ -1,0 +1,50 @@
+﻿a {
+    text-decoration: none;
+    color: darkred;
+}
+    a:hover {
+        font-weight: bold;
+    }
+
+#headerTitle {
+    font-size: 24px;
+    margin: 10px 5px 5px 25px;
+}
+
+.pane-content {
+    margin: 5px 5px 5px 5px;
+}
+
+.hidden-tab {
+    display: none !important;
+}
+
+#contentHeading {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 5px 5px 10px;
+}
+
+#contentTabStrip h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 5px 5px 0px;
+}
+
+#contentTabStrip h3 {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 5px 5px 10px;
+}
+
+div.sample-code {
+    margin-left: 20px;
+    margin-right: 20px;
+    border: 1px gray solid;
+    background-color: snow;
+}
+
+    div.sample-code pre {
+        padding: 0px 0px 0px 0px !important;
+        background-color: snow;
+    }

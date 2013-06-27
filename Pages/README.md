@@ -1,0 +1,1 @@
+Files used by the Kendo UI Plugins GitHub Pages found at: (http://kendo-labs.github.io/kendo-plugins/)

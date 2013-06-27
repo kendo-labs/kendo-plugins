@@ -1,0 +1,65 @@
+﻿<!-- Index page for the Kendo UI Plugins GitHub Pages found at: http://kendo-labs.github.io/kendo-plugins/ -->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Kendo Plugins</title>
+    <link href="http://cdn.kendostatic.com/2013.1.319/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2013.1.319/styles/kendo.bootstrap.min.css" rel="stylesheet" />
+    <link href="Web/All/styles/kendo.web.plugins.css" rel="stylesheet" />
+    <link href="Pages/Content/Rainbow/tricolore.css" rel="stylesheet" />
+    <link href="Pages/Content/site.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="mainLayout">
+        <div id="headerPane">
+            <a href="#/"><div id="headerTitle">Kendo UI Plugins Examples</div></a>
+        </div>
+        <div id="navigationPane">
+            <div class="pane-content" style="display:none;">
+                <ul id="navigationTreeView">
+                    <li>Web Plugins
+                        <ul>
+                            <li class="nav-page-route" data-hash="/GettingStarted">Getting Started</li>
+                            <li class="nav-page-route" data-hash="/ContextMenu">ContextMenu</li>
+                            <li class="nav-page-route" data-hash="/Dialogs">Standard Message Dialogs</li>
+                            <li class="nav-page-route" data-hash="/DropDownGrid">DropDownGrid</li>
+                            <li class="nav-page-route" data-hash="/DropDownTreeView">DropDownTreeView</li>
+                            <li class="nav-page-route" data-hash="/Grid">Grid</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="contentPane">
+            <div id="contentHeading"></div>
+            <div class="pane-content" style="display:none;">
+                <div id="contentTabStrip" style="display: none;">
+                    <ul>
+                        <li class="hidden-tab">Overview</li>
+                        <li class="hidden-tab">Examples</li>
+                        <li class="hidden-tab">Documentation</li>
+                    </ul>
+                    <div class="overview-tab"></div>
+                    <div class="examples-tab"></div>
+                    <div class="documentation-tab"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="http://cdn.kendostatic.com/2013.1.319/js/kendo.all.min.js"></script>
+	<script src="Web/All/js/kendo.web.plugins.js"></script>
+
+	<script src="Pages/Scripts/Rainbow/rainbow.js"></script>
+	<script src="Pages/Scripts/Rainbow/rainbow.html.js"></script>
+
+    <script src="http://demos.kendoui.com/content/shared/js/people.js"></script>
+
+    <script>var KendouiPlugins = { Pages: {} };</script>
+	<script src="Pages/Scripts/app.js"></script>
+    <script src="Pages/Scripts/router.js"></script>
+</body>
+</html>
