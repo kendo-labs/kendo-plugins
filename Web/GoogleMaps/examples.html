@@ -1,0 +1,387 @@
+<h2>Basic Maps Configuration</h2>
+
+<p>This is the simplest example of using the map.  All you need to do is have a div with a specified size.</p>
+
+<div class="sample-code">
+  <pre><code data-language="html" class="rainbow">
+  &lt;div class='map'&gt;&lt;/div&gt;
+  </code></pre>
+</div>
+
+<p>And then you can just call the <b>kendo.map</b> function</p>
+
+<div class="sample-code">
+  <pre><code data-language="javascript" class="rainbow">
+  // create a simple map
+  $('#simple').kendoMap();    
+  </code></pre>
+</div>   
+
+<h2>Example</h2>
+<div class="map" id="simple"></div>
+
+<h3>Map Centering</h3>
+
+<p>By default, the map is centered over Nashville, TN.  The map has to have a center point when it's created.  You can provide your own center by providing a google latitude and longitude object, or just an address or country name.  As long as Google can geocode it, it should work.</p>
+
+<p>When providing your own center, you will probably want to provide the zoom level as well. The <b>zoom</b> is <b>8</b> by default.  In the case of centering over something as large as the USA, we set the zoom much lower to zoom out.</p>
+
+<div class="sample-code">
+  <pre><code class="rainbow" data-language="javascript">
+  // create a map centered over the US of A
+  $('#usa').kendoMap({
+     map: {
+        options: {
+           center: 'USA',
+           zoom: 3
+        }
+     }
+  });    
+  </code></pre>
+</div>
+
+<h2>Example</h2>
+<div class="map" id="usa"></div>
+ 
+<h3>Maps Customization</h3>
+
+<p>You can customize the map by passing virtually any of the <a href="">mapsOptions</a> values to the <b>maps.options</b> object.</p>
+
+<p>In this example, the controls are disabled and the map type is set to <b>sattelite</b> to give us a nice arial view of The Grand Canyon.</p>
+
+<div class="sample-code">
+  <pre><code class="rainbow" data-language="javascript">
+  // customized map
+  $("#customized").kendoMap({
+     map: {
+        options: {
+          center: "The Grand Canyon",
+          draggable: false,
+          disableDefaultUI: true,
+          mapTypeId: google.maps.MapTypeId.SATELLITE
+        }
+     }
+  });
+  </code></pre>
+</div>
+
+<h2>Example</h2>
+<div class="map" id="customized"></div>
+
+<h2>Binding To Data</h2>
+
+<p>Just like most other Kendo UI widgets, the map can be bound to data by using a Kendo DataSource.</p>
+
+<p>If you are passing a data set that has latitude and longitude in it, you simply need to specify the <b>latField</b> and <b>lngField</b>.  By default they are set to <b>lat</b> and </b>lng</b>.</p>
+
+<p>For each item in the dataset, the map will drop a marker.  You can specify the template for the marker</p>
+
+<div class="sample-code">
+  <pre><code class="rainbow" data-language="javascript">
+  var data = [
+   { latitude: 28.381642, longitude: -81.56376, 
+     name: "Disney World" },
+   { latitude: 28.474907, longitude: -81.466316, 
+     name: "Universal Studios" },
+   { latitude: 28.411785, longitude: -81.460018, 
+     name: "Sea World" }];
+
+  $("#position").kendoMap({
+     dataSource: data,
+     latField: "latitude",
+     lngField: "longitude",
+     map: {
+        options: {
+           center: {
+              lat: 28.434783,
+              lng: -81.518497
+           },
+           zoom: 10
+        }
+     }
+  });    
+  </code></pre>
+</div>
+
+    
+<h2>Example</h2>
+<div class="map" id="position"></div>
+      
+<h2>Geocoding</h2>
+<p>Sometimes you don't know the latitude and longitude of your points.  That's OK as the maps widget will try and geocode them for you using the Google Maps Geocoder.  This works for the center point AND any data points.</p>
+<p>For data points, instead of specifying a <b>latField</b> or <b>lngField</b>, simply provide an <b>addressField</b>.  If you do not provide one, it looks for a field called <b>address</b> by default.</p>
+
+<div class="sample-code">
+  <pre><code class="rainbow" data-language="javascript">
+    var data = [
+   { address: "Disney World" },
+   { address: "Universal Studios" },
+   { address: "Sea World Florida" }];
+
+  $("#position").kendoMap({
+     dataSource: data
+     map: {
+        options: {
+           center: "Lake Sheen, Florida",
+           zoom: 10
+        }
+     }
+  });
+  </code></pre>
+</div>
+            
+      
+<h2>Example</h2>
+<div class="map" id="position_geocode"></div>
+
+<h2>Map Marker Customization And Templates</h2>
+
+<h3>Marker Options</h3>
+
+<p>You can tweak the marker by passing any of the supported <a href="https://developers.google.com/maps/documentation/javascript/reference\#MarkerOptions">marker options</a> of the Google Maps v3 API.</p>
+
+<p>You can control things like animation and draggability.</p>
+
+<div class="sample-code">
+  <pre><code class="rainbow" data-language="javascript">
+  var data = [{ lat: 28.381642, lng: -81.56376, 
+              name: &quot;Disney World&quot; },
+            { lat: 28.474907, lng: -81.466316, 
+              name: &quot;Universal Studios&quot; },
+            { lat: 28.411785, lng: -81.460018, 
+              name: &quot;Sea World&quot; }];
+
+  (&quot;#animation&quot;).kendoMap({
+    dataSource: data,
+    map: {
+      options: {
+        center: {
+            lat: 28.434783,
+            lng: -81.518497
+        },
+        zoom: 10
+      },
+      marker: {
+        template: &quot;&lt;span&gt;#: name #&lt;/span&gt;&quot;,
+        options: {
+          animation: google.maps.Animation,
+          draggable: true
+        }
+      }
+    }
+  });
+  </code></pre>
+</div>
+
+<h2>Example</h2>
+<div class="map" id="animation"></div>
+
+<h2>Markers</h2>
+
+<p>You have quite a bit of control over the markers on the map.  In fact, any value that can be passed to the markerOptions object can be passed in via the <b>options</b> object on the <b>markers</b> options object.</p>
+
+<p>For instance, you can specify an animation using the <b>google.marker.animation</b> constant.</p>
+    
+<div class="sample-code">
+  <pre><code class="rainbow" data-language="javascript">
+  var data = [{ lat: 28.381642, lng: -81.56376, 
+              name: &quot;Disney World&quot; },
+            { lat: 28.474907, lng: -81.466316, 
+              name: &quot;Universal Studios&quot; },
+            { lat: 28.411785, lng: -81.460018, 
+              name: &quot;Sea World&quot; }];
+
+  $(&quot;\#infowindows&quot;).kendoMap({
+    dataSource: data,
+    map: {
+      options: {
+        center: {
+            lat: 28.434783,
+            lng: -81.518497
+        },
+        zoom: 10
+      }
+    },
+    marker: {
+       template: &quot;&lt;span&gt;\#: name \#&lt;/span&gt;&quot;
+    }
+  });
+  </pre></code>
+</div>
+
+<h2>Example</h2>
+<div class="map" id="infowindows"></div>
+
+<h2>Fitting To Bounds</h2>
+    
+<p>It's more likely that you will have data points but not know the exact center of those points.  In this case, you can "fit" the map to your bounds.  This is turned off by default.  You can enable it by setting <b>fitBounds: true</b>.  
+<p>You will most likely want to set the zoom level as well or your markers will be at the edges of your map.  Google Maps does not fit bounds and zoom at the same time, but the widget attaches a listener to the maps idle event and then applies the zoom for you.</p>
+        
+<div class="sample-code">
+  <pre><code class="rainbow" data-language="javascript">
+  var data = [{ lat: 28.381642, lng: -81.56376, 
+              name: &quot;Disney World&quot; },
+            { lat: 28.474907, lng: -81.466316, 
+              name: &quot;Universal Studios&quot; },
+            { lat: 28.411785, lng: -81.460018, 
+              name: &quot;Sea World&quot; }];
+
+  $(&quot;#fitbounds&quot;).kendoMap({
+    dataSource: data,
+    map: {
+      options: {
+        zoom: 10
+      }
+    },
+    fitBounds: true,
+    marker: {
+       template: &quot;&lt;span&gt;\#: name \#&lt;/span&gt;&quot;
+    }
+  });    
+  </code></pre>
+</div>
+
+<h2>Example</h2>
+<div class="map" id="fitbounds"></div>
+
+<script>
+  
+  $(function() {
+    
+    
+
+    $(document).on("/GoogleMaps", function() {
+      
+      var simple = $("#simple").kendoMap().data("kendoMap");
+
+      var usa = $('#usa').kendoMap({
+      map: {
+        options: {
+          center: 'USA',
+            zoom: 3
+          }
+        }
+      }).data("kendoMap");
+
+      $("#customized").kendoMap({
+        map: {
+          options: {
+            center: "The Grand Canyon",
+            draggable: false,
+            disableDefaultUI: true,
+            mapTypeId: google.maps.MapTypeId.SATELLITE
+          }
+        }
+      });
+
+      var data = [
+     { latitude: 28.381642, longitude: -81.56376, 
+       name: "Disney World" },
+     { latitude: 28.474907, longitude: -81.466316, 
+       name: "Universal Studios" },
+     { latitude: 28.411785, longitude: -81.460018, 
+       name: "Sea World" }];
+
+      $("#position").kendoMap({
+         dataSource: data,
+         latField: "latitude",
+         lngField: "longitude",
+         map: {
+            options: {
+               center: {
+                  lat: 28.434783,
+                  lng: -81.518497
+               },
+               zoom: 10
+            }
+         }
+      }); 
+
+      var geo_data = [ { address: "Disney World" },
+                 { address: "Universal Studios" },
+                 { address: "Sea World Florida" } ];
+
+      $("#position_geocode").kendoMap({
+         dataSource: geo_data,
+         map: {
+            options: {
+               center: "Lake Sheen, Florida",
+               zoom: 10
+            }
+         }
+      });
+
+      var data = [{ lat: 28.381642, lng: -81.56376, 
+              name: "Disney World" },
+            { lat: 28.474907, lng: -81.466316, 
+              name: "Universal Studios" },
+            { lat: 28.411785, lng: -81.460018, 
+              name: "Sea World" }];
+
+      $("#animation").kendoMap({
+        dataSource: data,
+        map: {
+          options: {
+            center: {
+                lat: 28.434783,
+                lng: -81.518497
+            },
+            zoom: 10
+          },
+          marker: {
+            template: "<span>#: name #</span>",
+            options: {
+              animation: google.maps.Animation,
+              draggable: true
+            }
+          }
+        }
+      });
+
+      var data = [{ lat: 28.381642, lng: -81.56376, 
+              name: "Disney World" },
+            { lat: 28.474907, lng: -81.466316, 
+              name: "Universal Studios" },
+            { lat: 28.411785, lng: -81.460018, 
+              name: "Sea World" }];
+
+      $("#infowindows").kendoMap({
+        dataSource: data,
+        map: {
+          options: {
+            center: {
+                lat: 28.434783,
+                lng: -81.518497
+            },
+            zoom: 10
+          }
+        },
+        marker: {
+           template: "<span>\#: name \#</span>"
+        }
+      });
+
+    });
+    
+    var data = [{ lat: 28.381642, lng: -81.56376, 
+                name: "Disney World" },
+              { lat: 28.474907, lng: -81.466316, 
+                name: "Universal Studios" },
+              { lat: 28.411785, lng: -81.460018, 
+                name: "Sea World" }];
+
+    $("#fitbounds").kendoMap({
+      dataSource: data,
+      map: {
+        options: {
+          zoom: 10
+        }
+      },
+      fitBounds: true,
+      marker: {
+         template: "<span>\#: name \#</span>"
+      }
+    });    
+
+  });
+</script>
