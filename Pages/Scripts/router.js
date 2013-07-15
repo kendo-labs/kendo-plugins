@@ -1,5 +1,10 @@
 ﻿KendouiPlugins.Pages.Router = function (kendo, $) {
-    var _router = new kendo.Router();
+    var currentRoute = "/";
+    var _router = new kendo.Router({
+        change: function(e) {
+            currentRoute = e.url;
+        }
+    });
 
     var _routes = [
         { route: "/GettingStarted", root: "Pages/GettingStarted", title: "Getting Started" },
@@ -7,7 +12,8 @@
         { route: "/Dialogs", root: "Web/Dialogs", title: "Standard Message Dialogs" },
         { route: "/DropDownGrid", root: "Web/DropDownGrid", title: "DropDownGrid" },
         { route: "/DropDownTreeView", root: "Web/DropDownTreeView", title: "DropDownTreeView" },
-        { route: "/Grid", root: "Web/Grid", title: "Grid" }
+        { route: "/Grid", root: "Web/Grid", title: "Grid" },
+        { route: "/GoogleMaps", root: "Web/GoogleMaps", title: "Google Maps" }
     ];
 
     addRoute = function (args) {
@@ -76,9 +82,15 @@
         _router.start();
     };
 
+    var url = function () {
+        return currentRoute;
+    }
+
     return {
-        start: start
+        start: start,
+        url: url
     };
+
 }(window.kendo, jQuery);
 
 jQuery(function () {

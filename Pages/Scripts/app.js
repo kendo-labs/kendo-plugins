@@ -37,7 +37,11 @@
             }
         }).data("kendoTreeView").expand(".k-item");
 
-        $("#contentTabStrip").kendoTabStrip().data("kendoTabStrip").select(0);
+        $("#contentTabStrip").kendoTabStrip({
+            activate: function() {
+                $(document).trigger(KendouiPlugins.Pages.Router.url());
+            }
+        }).data("kendoTabStrip").select(0);
 
         $(".pane-content").show();
     };
