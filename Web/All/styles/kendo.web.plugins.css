@@ -5,6 +5,11 @@
 
 /* General */
 
+/* Times New is fugly */
+body {
+  font-family: Tahoma, sans-serif;
+}
+
 .k-ext-required {
     background-color: pink;
 }
@@ -175,4 +180,18 @@
 .k-ext-table {
 	background-position: -108px -270px;
     height: 20px !important;
+}
+
+/* Maps */
+.map {
+  width: 480px;
+  height: 400px;
+}
+
+.map img { 
+  max-width: none;
+}
+
+.map label { 
+  width: auto; display:inline; 
 }
