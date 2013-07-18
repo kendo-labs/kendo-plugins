@@ -1,6 +1,6 @@
 ﻿KendouiPlugins.Pages.App = function (kendo, $) {
     init = function () {
-        $("#mainLayout").kendoExtBorderLayout({
+        $("#mainSplitter").kendoSplitter({
             items: [
             {
                 title: "Header",

@@ -25,6 +25,7 @@ The Kendo Plugins repository is divided into the following folders:
 * **Mobile** - Kendo Plugins based on Kendo UI Mobile for the current version of Kendo UI.
 * **DataViz** - Kendo Plugins based on Kendo UI DataViz for the current version of Kendo UI.
 * **Framework** - Kendo Plugins based on the Kendo UI Framework for the current version of Kendo UI.
+* **Pages** - Content for the GitHub Pages site.
 
 Each plugin folder contains a JavaScript file which contains the respective Kendo UI Widget.
 
@@ -36,13 +37,13 @@ Each plugin folder contains a JavaScript file which contains the respective Kend
 * [MVVM](http://www.kendoui.com/blogs/teamblog/posts/12-04-24/creating_a_kendo_ui_mvvm_widget.aspx)
 * [YouTube](http://www.kendoui.com/blogs/teamblog/posts/12-04-03/creating_custom_kendo_ui_plugins.aspx)
 
+GitHub Pages have been published for this project and can be found at: http://kendo-labs.github.io/kendo-plugins/
+
 ## How to Contribute
 
 If you would like to contribute a kendo plugin, or add features/fixes to an exsiting one, please read the [guidelines for pull requests and contributions](CONTRIBUTING.md). Following these guidelines will help make your contributions easier to bring in to the next release.
 
 ## Getting Help
-
-StackOverflow is a good place to start.  Make sure that you include a [JSFiddle](http://www.jsfiddle.net) or [JSBin](http://www.jsbin.com) sample with your question.  It increases the likelyhood of getting a quick answer.
 
 As a part of Kendo UI Labs, Kendo Plugins are intended to be a community-run project, and not an official part of any Kendo UI SKU (Web, DataViz, Mobile or Complete). As such, this project is not a supported part of Kendo UI, and is not covered under the support agreements for Kendo UI license holders. Please do not create support requests for this project, as these will be immediately closed and you'll be directed to post your question on a community forum.
 
@@ -52,7 +53,9 @@ For change logs and release notes, see the [changelog](CHANGELOG.md) file.
 
 ## Announcements
 
-* 01-APR
+* 27-JUN-2013
+ * GitHub Pages have been created.
+* 01-APR-2013
  * The repository will be restructured the week of 01-APR.
  * The [Kendo UI Extended API](https://github.com/jsExtensions/kendoui-extended-api) repository will be moved to the Kendo Plugins repository the week of 01-APR.
  * Kendo UI Plugins repo will be using GitHub Pages to provide documentation for the plugins.  Look for it in April.
