@@ -317,7 +317,12 @@
         }
     };
     
-     /*YesNoCancelDialog*/
+    /*
+     *
+     * YesNoCancelDialog
+     *
+     */
+
     kendo.ui.ExtYesNoCancelDialog = {
         show: function (options) {
             return new $.Deferred(function (deferred) {
@@ -362,7 +367,7 @@
         },
 
         hide: function () {
-            $("#extYesNoDialog").data("kendoExtDialog").close();
+            $("#ExtYesNoCancelDialog").data("kendoExtDialog").close();
         }
     };
     
