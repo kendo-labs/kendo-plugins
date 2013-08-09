@@ -13,9 +13,9 @@
             base.fn.init.call(this, element, options);
             $(element).addClass("km-indexedlistview");
 
-            if (this._scroller()) {
+            if (this.scroller()) {
                 kendo.onResize(function() {
-                    this._sizeIndexList(self.headers.length);
+                    self._sizeIndexList(self._headerFixer.headers.length);
                 });
             }
 
@@ -23,7 +23,6 @@
             this._scrollWrapper.prepend(this._indexList);
             $("body").prepend(this._indexCard);
 
-           
             this.userEvents = new kendo.UserEvents(this._indexList, {
                 stopPropagation: true,
                 press: function (e) { self._onIndexDragStart(); self._onIndexDragMove(e); },
@@ -32,21 +31,20 @@
                 move: $.proxy(this._onIndexDragMove, this),
                 end: $.proxy(this._onIndexDragEnd, this)
             });
+
+            this.bind("dataBound", function(e) {
+                var items = e.sender._itemBinder.dataSource._view;
+                if (this.dataSource.group()[0]) {
+                    this._indexList.empty();
+                    this._sizeIndexList(items.length);
+                    this._createIndexList(items);
+                }
+            });
         },
 
         options: $.extend(base.options, {
             name: "IndexedListView"
         }),
-
-        refresh: function (e) {
-            base.fn.refresh.call(this, e);
-
-            if (this.dataSource.group()[0]) {
-                this._indexList.empty();
-                this._sizeIndexList(this.dataSource.view().length);
-                this._createIndexList(this.dataSource.view());
-            }
-        },
 
 		_indexSelected: function (x, y) {
 			try {
@@ -64,14 +62,14 @@
 		},
 
 		_scrollToIndex: function (targetIndex) {
-			var targetTop = this.headers[this.headers.length - targetIndex - 1].offset;
-			this._scroller().scrollTo(0, targetTop * -1);
+			var targetTop = this._headerFixer.headers[this._headerFixer.headers.length - targetIndex - 1].offset;
+			this.scroller().scrollTo(0, targetTop * -1);
 		},
 
 		_showIndexCard: function (y, text) {
 			this._indexCard.text(text);
 			this._indexCard.css("top", (y - (this._indexCard.height() / 2)) + "px");
-			this._indexCard.css("left", (Math.floor((this._scrollWrapper.width() * .7) - (this._indexCard.width() / 2))) + "px");
+			this._indexCard.css("left", (Math.floor((this._scrollWrapper.width() * 0.7) - (this._indexCard.width() / 2))) + "px");
 			this._indexCard.show();
 		},
 
