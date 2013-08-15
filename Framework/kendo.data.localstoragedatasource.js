@@ -120,7 +120,7 @@
 			// used when saving records to localStorage.
 			itemBase = options.itemBase || 'kendo-ds';
 			separator = options.separator || '-';
-			idField = options.schema.model.idField;
+			idField = options.schema.model.idField || options.schema.model.id;
 
 			// The idField is required. If not specified on the model, throw an error
 			if (!idField) {
