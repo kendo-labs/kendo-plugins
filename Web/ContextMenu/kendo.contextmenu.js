@@ -141,10 +141,10 @@
                         ) {
                         //off screen detected, need to ignore off set settings and mouse position and position to fix the menu
                         if ((eleWidth + xPos) > window.innerWidth) {
-                            xPos = window.innerWidth - eleWidth - 1;
+                            xPos = window.innerWidth - eleWidth - 5;
                         }
                         if ((eleHeight + yPos) > window.innerHeight) {
-                            yPos = window.innerHeight - eleHeight - 1;
+                            yPos = window.innerHeight - eleHeight - 5;
                         }
                     }
                 }
