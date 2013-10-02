@@ -29,6 +29,34 @@
 </code></pre>
 </div>
 
+<div class="section-title">JavaScript Code</div>
+<div class="sample-code">
+    <pre><code data-language="javascript">
+    var dropDownTreeView = $("#dropDownTreeView").kendoExtDropDownTreeView({
+        treeview: {
+            dataSource: new kendo.data.HierarchicalDataSource({
+                data: [
+                    {
+                        text: "Furniture", items: [
+                            { text: "Tables & Chairs" },
+                            { text: "Sofas" },
+                            { text: "Occasional Furniture" }
+                        ]
+                    },
+                    {
+                        text: "Decor", items: [
+                            { text: "Bed Linen" },
+                            { text: "Curtains & Blinds" },
+                            { text: "Carpets" }
+                        ]
+                    }
+                ]
+            })
+        }
+    }).data("kendoExtDropDownTreeView");
+</code></pre>
+</div>
+
 <script>
     $(function () {
         // Initialize the DropDownTreeView.

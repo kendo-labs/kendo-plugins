@@ -40,7 +40,6 @@
 		    }
 		}).data("kendoTabStrip");
 		_tabStrip.select(0);
-		_tabStrip.element.show();
 
 		resize();
     };
@@ -63,7 +62,7 @@
             if (typeof force === "undefined") {
                 resize();
             }
-        }, 250);
+        });
     };
 
     return {

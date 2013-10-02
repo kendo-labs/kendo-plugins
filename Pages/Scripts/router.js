@@ -43,16 +43,19 @@
             };
 
             // Load the overview for the plugin.
-            $(".overview-tab").load(kendo.format("{0}/overview.html", args.root), function (response, status, xhr) {
+            $(".overview-tab").load(kendo.format("{0}/overview.html?_={1}", args.root, new Date().getTime()), function (response, status, xhr) {
                 if (status == "error") {
                     $(".overview-tab").empty();
+                    $("#contentTabStrip").hide();
+                } else {
+                    $("#contentTabStrip").show();
                 }
                 completed.overview = true;
                 loadCompleted();
             });
 
             // Load the examples for the plugin.
-            $(".examples-tab").load(kendo.format("{0}/examples.html", args.root), function (response, status, xhr) {
+            $(".examples-tab").load(kendo.format("{0}/examples.html?_={1}", args.root, new Date().getTime()), function (response, status, xhr) {
                 if (status == "error") {
                     $(".examples-tab").empty();
                     $($("#contentTabStrip li")[1]).hide();
@@ -64,7 +67,7 @@
             });
 
             // Load the documentation for the plugin.
-            $(".documentation-tab").load(kendo.format("{0}/documentation.html", args.root), function (response, status, xhr) {
+            $(".documentation-tab").load(kendo.format("{0}/documentation.html?_={1}", args.root, new Date().getTime()), function (response, status, xhr) {
                 if (status == "error") {
                     $(".documentation-tab").empty();
                     $($("#contentTabStrip li")[2]).hide();
@@ -81,13 +84,12 @@
         addRoute(route);
     });
 
-    var start = function (route) {
-        _router.start();
-        _router.navigate(route);
-    };
-
     var start = function () {
         _router.start();
+
+        if (window.location.hash.length === 0) {
+            window.location.href = kendo.format("#{0}", _routes[0].route);
+        }
     };
 
     var url = function () {
