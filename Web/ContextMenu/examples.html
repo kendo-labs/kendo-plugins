@@ -18,8 +18,47 @@
         The second context menu is displayed when the user right-clicks on a "root" item in the 
         TreeView.
     </p>
+
+    <h2>Example 1</h2>
     <div id="contextMenuTarget" class="k-block" style="font-weight:bold;">Right-click on this div</div>
+
+    <div class="property-title">HTML Code</div>
+    <div class="sample-code">
+<pre><code data-language="html">
+    &lt;ul id="itemcontextmenu">
+      &lt;li>
+        &lt;span class="k-edit k-icon">&lt;/span>Edit
+      &lt;/li>
+      &lt;li class="k-ext-menu-separator">
+        &lt;hr />
+      &lt;/li>
+      &lt;li>
+        &lt;span class="k-delete k-icon">&lt;/span>Delete
+      &lt;/li>
+    &lt;/ul>
+</code></pre>
+    </div>
+
+    <div class="property-title">JavaScript Code</div>
+    <div class="sample-code">
+<pre><code data-language="javascript">
+    $("#itemcontextmenu").kendoExtContextMenu({
+      targets: "#contextMenuTarget, #treeview .k-item .furniture, #treeview .k-item .decor",
+        itemSelect: function (e) {
+          kendo.ui.ExtAlertDialog.show({
+            title: "Selection",
+            message: kendo.format('You selected: "{0}" on "{1}"',
+              $(e.item).text().trim(),
+              $(e.target).text()),
+            icon: "k-ext-information"
+          });
+        }
+    });
+</code></pre>
+    </div>
+
     <br />
+    <h2>Example 2</h2>
     <div style="font-weight:bold;">Right-click on a tree node.</div>
     <div id="treeview">
     </div>
@@ -38,6 +77,49 @@
 
     <ul id="categorycontextmenu">
     </ul>
+
+    <div class="property-title">HTML Code</div>
+    <div class="sample-code">
+<pre><code data-language="html">
+    &lt;ul id="categorycontextmenu">
+    &lt;/ul>
+</code></pre>
+    </div>
+    <div class="property-title">JavaScript Code</div>
+    <div class="sample-code">
+<pre><code data-language="javascript">
+    $("#categorycontextmenu").kendoExtContextMenu({
+      width: "175px",
+      targets: "#treeview .k-item .category",
+      items: [
+        {
+          text: "Add Item",
+          iconCss: "k-add"
+        },
+        {
+          text: "Rename Category",
+          iconCss: "k-edit"
+        },
+        {
+          separator: true
+        },
+        {
+          text: "Delete Category",
+          iconCss: "k-delete"
+        }
+      ],
+      itemSelect: function (e) {
+        kendo.ui.ExtAlertDialog.show({
+          title: "Selection",
+          message: kendo.format('You selected: "{0}" on "{1}"',
+            $(e.item).text().trim(),
+            $(e.target).text()),
+          icon: "k-ext-information"
+        });
+      }
+    });
+</code></pre>
+    </div>
 </div>
 
 <script>

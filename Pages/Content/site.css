@@ -1,4 +1,17 @@
-﻿a {
+﻿html, body {
+	font: Arial,Helvetica,sans-serif;
+    font-size: 80% !important;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+}
+
+input, textarea, pre, p {
+	font: Arial,Helvetica,sans-serif;
+    font-size: 80% !important;
+}
+
+a {
     text-decoration: none;
     color: darkred;
 }
@@ -6,35 +19,81 @@
         font-weight: bold;
     }
 
+#headerPane {
+    background-color: black;
+}
+
 #headerTitle {
     font-size: 24px;
-    margin: 10px 5px 5px 25px;
+    margin: 4px 4px 4px 4px;
+    color: white;
+    position: absolute;
+    top: 0px;
+    margin-left:35px;
 }
 
-.pane-content {
-    margin: 5px 5px 5px 5px;
+#contentPane {
+    overflow: hidden;
 }
 
-.hidden-tab {
-    display: none !important;
+#contentTabStrip .k-content {
+    overflow: auto !important;
+    padding: 5px;
 }
 
-#contentHeading {
-    font-size: 20px;
+/* DOCUMENTATION */
+
+.section, .property-section, .note-section {
+    margin-left: 20px;
+    position: relative;
+}
+
+.property-section {
+    margin-bottom: 10px;
+}
+
+.section-title {
+    font-size: 14px;
     font-weight: bold;
-    margin: 10px 5px 5px 10px;
+    margin-bottom: 5px;
+    margin-top: 10px;
 }
 
-#contentTabStrip h2 {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 10px 5px 5px 0px;
+.subsection-title, .property-title {
+    font-size: 12px;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
-#contentTabStrip h3 {
-    font-size: 16px;
+.subsection-title {
+    font-style: italic;
+}
+
+.property-title {
     font-weight: bold;
-    margin: 10px 5px 5px 10px;
+}
+
+.property-type {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+.parameter-title {
+    font-weight: bold;
+}
+.parameter-type {
+    font-style: italic;
+}
+
+.external-link-image {
+    background-image: url('./Images/external-link.gif');
+    height: 16px;
+    width: 16px;
+    background-repeat: no-repeat;
+    display: inline-block;
 }
 
 div.sample-code {
