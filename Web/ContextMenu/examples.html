@@ -22,9 +22,23 @@
     <h2>Example 1</h2>
     <div id="contextMenuTarget" class="k-block" style="font-weight:bold;">Right-click on this div</div>
 
+    <ul id="itemcontextmenu">
+        <li>
+            <span class="k-edit k-icon"></span>Edit
+        </li>
+        <li class="k-ext-menu-separator">
+            <hr />
+        </li>
+        <li>
+            <span class="k-delete k-icon"></span>Delete
+        </li>
+    </ul>
+
     <div class="property-title">HTML Code</div>
     <div class="sample-code">
 <pre><code data-language="html">
+    &lt;div id="contextMenuTarget" class="k-block" style="font-weight:bold;">Right-click on this div&lt;/div>
+
     &lt;ul id="itemcontextmenu">
       &lt;li>
         &lt;span class="k-edit k-icon">&lt;/span>Edit
@@ -43,7 +57,7 @@
     <div class="sample-code">
 <pre><code data-language="javascript">
     $("#itemcontextmenu").kendoExtContextMenu({
-      targets: "#contextMenuTarget, #treeview .k-item .furniture, #treeview .k-item .decor",
+      targets: "#contextMenuTarget",
         itemSelect: function (e) {
           kendo.ui.ExtAlertDialog.show({
             title: "Selection",
@@ -63,24 +77,15 @@
     <div id="treeview">
     </div>
 
-    <ul id="itemcontextmenu">
-        <li>
-            <span class="k-edit k-icon"></span>Edit
-        </li>
-        <li class="k-ext-menu-separator">
-            <hr />
-        </li>
-        <li>
-            <span class="k-delete k-icon"></span>Delete
-        </li>
-    </ul>
-
     <ul id="categorycontextmenu">
     </ul>
 
     <div class="property-title">HTML Code</div>
     <div class="sample-code">
 <pre><code data-language="html">
+    &lt;div id="treeview">
+    &lt;/div>
+
     &lt;ul id="categorycontextmenu">
     &lt;/ul>
 </code></pre>
@@ -125,7 +130,7 @@
 <script>
     $(function () {
         $("#itemcontextmenu").kendoExtContextMenu({
-            targets: "#contextMenuTarget, #treeview .k-item .furniture, #treeview .k-item .decor",
+            targets: "#contextMenuTarget",
             itemSelect: function (e) {
                 var msg = kendo.format('You selected: "{0}" on "{1}"',
                     $(e.item).text().trim(),
