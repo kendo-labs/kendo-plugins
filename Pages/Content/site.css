@@ -32,7 +32,7 @@ a {
     margin-left:35px;
 }
 
-#contentPane {
+#mainPane, #contentPane {
     overflow: hidden;
 }
 

@@ -1,1 +1,178 @@
-﻿Coming Soon
+﻿<style type="text/css">
+    .highlight-section {
+        margin-top: 10px;
+        width: 600px;
+        padding: 7px 7px 7px 7px;
+        min-height: 35px;
+    }
+</style>
+
+<div id="selectIconContainer" style="display:block;margin-bottom:20px;">
+    <span>Icon: </span>
+    <select id="selectIcon">
+        <option value="k-ext-information">Information</option>
+        <option value="k-ext-question">Question</option>
+        <option value="k-ext-warning">Warning</option>
+        <option value="k-ext-error">Error</option>
+    </select>
+</div>
+
+<script>
+    var selectIcon = null;
+
+    $(function () {
+        selectIcon = $("#selectIcon").kendoDropDownList().data("kendoDropDownList");
+    });
+</script>
+
+
+<!-- Alert Dialog -->
+
+<h2>Example of the Alert Dialog</h2>
+
+<button id="showAlertDialogButton" class="k-button">Show Alert Dialog</button>
+<div id="alertDialogUserResponse" class="highlight-section k-block" style="margin-top:20px;">
+</div>
+
+<div class="section-title">JavaScript Code</div>
+<div class="sample-code">
+<pre><code data-language="javascript">
+    $.when(kendo.ui.ExtAlertDialog.show({ title: "Alert!", message: "This is a sample alert box", icon: selectIcon.value() })).done(function () {
+        $("#alertDialogUserResponse").append(kendo.format("&lt;div>OK button clicked at: {0}&lt;/div>", new Date().toLocaleTimeString()));
+    });
+</code></pre>
+</div>
+
+<script>
+    $(function () {
+        $("#showAlertDialogButton").on("click", function () {
+            $.when(kendo.ui.ExtAlertDialog.show({ title: "Alert!", message: "This is a sample alert box", icon: selectIcon.value() })).done(function () {
+                $("#alertDialogUserResponse").append(kendo.format("<div>OK button clicked at: {0}</div>", new Date().toLocaleTimeString()));
+            });
+        });
+    });
+</script>
+
+
+<!-- OK/Cancel Dialog -->
+
+<h2>Example of the OK/Cancel Dialog</h2>
+
+<button id="showOkCancelDialogButton" class="k-button">Show OK/Cancel Dialog</button>
+<div id="okCancelDialogUserResponse" class="highlight-section k-block" style="margin-top:20px;">
+</div>
+
+<div class="section-title">JavaScript Code</div>
+<div class="sample-code">
+<pre><code data-language="javascript">
+    $.when(kendo.ui.ExtOkCancelDialog.show({ title: "OK/Cancel", message: "This is a sample ok/cancel box", icon: selectIcon.value() })).done(function (response) {
+        $("#okCancelDialogUserResponse").append(kendo.format("&lt;div>{0} button clicked at: {1}&lt;/div>", response.button, new Date().toLocaleTimeString()));
+    });
+</code></pre>
+</div>
+
+<script>
+    $(function () {
+        $("#showOkCancelDialogButton").on("click", function () {
+            $.when(kendo.ui.ExtOkCancelDialog.show({ title: "OK/Cancel", message: "This is a sample ok/cancel box", icon: selectIcon.value() })).done(function (response) {
+                $("#okCancelDialogUserResponse").append(kendo.format("<div>{0} button clicked at: {1}</div>", response.button, new Date().toLocaleTimeString()));
+            });
+        });
+    });
+</script>
+
+
+<!-- Yes/No Dialog -->
+
+<h2>Example of the Yes/No Dialog</h2>
+
+<button id="showYesNoDialogButton" class="k-button">Show Yes/No Dialog</button>
+<div id="yesNoDialogUserResponse" class="highlight-section k-block" style="margin-top:20px;">
+</div>
+
+<div class="section-title">JavaScript Code</div>
+<div class="sample-code">
+<pre><code data-language="javascript">
+    $.when(kendo.ui.ExtYesNoDialog.show({ title: "Yes/No", message: "This is a sample ok/cancel box", icon: selectIcon.value() })).done(function (response) {
+        $("#yesNoDialogUserResponse").append(kendo.format("&lt;div>{0} button clicked at: {1}&lt;/div>", response.button, new Date().toLocaleTimeString()));
+    });
+</code></pre>
+</div>
+
+<script>
+    $(function () {
+        $("#showYesNoDialogButton").on("click", function () {
+            $.when(kendo.ui.ExtYesNoDialog.show({ title: "Yes/No", message: "This is a sample yes/no box", icon: selectIcon.value() })).done(function (response) {
+                $("#yesNoDialogUserResponse").append(kendo.format("<div>{0} button clicked at: {1}</div>", response.button, new Date().toLocaleTimeString()));
+            });
+        });
+    });
+</script>
+
+
+<!-- Wait Dialog -->
+
+<h2>Example of the Wait Dialog</h2>
+
+<button id="showWaitDialogButton" class="k-button">Show Wait Dialog for 5 seconds</button>
+
+<div class="section-title">JavaScript Code</div>
+<div class="sample-code">
+<pre><code data-language="javascript">
+    $("#showWaitDialogButton").on("click", function () {
+        $.when(kendo.ui.ExtWaitDialog.show({ title: "Wait", message: "Waiting for 5 seconds..." })).done(function () {
+            setTimeout(function () {
+                kendo.ui.ExtWaitDialog.hide();
+            }, 5000);
+        });
+    });
+</code></pre>
+</div>
+
+<script>
+    $(function () {
+        $("#showWaitDialogButton").on("click", function () {
+            $.when(kendo.ui.ExtWaitDialog.show({ title: "Wait", message: "Waiting for 5 seconds..." })).done(function () {
+                setTimeout(function () {
+                    kendo.ui.ExtWaitDialog.hide();
+                }, 5000);
+            });
+        });
+    });
+</script>
+
+
+<!-- Input Dialog -->
+
+<h2>Example of the Input Dialog</h2>
+
+<button id="showInputDialogButton" class="k-button">Show Input Dialog</button>
+<div id="inputDialogUserResponse" class="highlight-section k-block" style="margin-top:20px;">
+</div>
+
+<div class="section-title">JavaScript Code</div>
+<div class="sample-code">
+<pre><code data-language="javascript">
+    $.when(kendo.ui.ExtInputDialog.show({ title: "Input", message: "Please enter your name:", required: true })).done(function (response) {
+        if (response.button == "OK") {
+            $("#inputDialogUserResponse").append(kendo.format("&lt;div>{0} button clicked at: {1} with input of: {2}&lt;/div>", response.button, new Date().toLocaleTimeString(), response.input));
+        } else {
+            $("#inputDialogUserResponse").append(kendo.format("&lt;div>{0} button clicked at: {1}&lt;/div>", response.button, new Date().toLocaleTimeString()));
+        }
+    });
+</code></pre>
+</div>
+
+<script>
+    $(function () {
+        $("#showInputDialogButton").on("click", function () {
+            $.when(kendo.ui.ExtInputDialog.show({ title: "Input", message: "Please enter your name:", required: true })).done(function (response) {
+                if (response.button == "OK") {
+                    $("#inputDialogUserResponse").append(kendo.format("<div>{0} button clicked at: {1} with input of: {2}</div>", response.button, new Date().toLocaleTimeString(), response.input));
+                } else {
+                    $("#inputDialogUserResponse").append(kendo.format("<div>{0} button clicked at: {1}</div>", response.button, new Date().toLocaleTimeString()));
+                }
+            });
+        });
+    });
+</script>
