@@ -1,6 +1,6 @@
 ﻿html, body {
 	font: Arial,Helvetica,sans-serif;
-    font-size: 80% !important;
+    font-size: 90% !important;
 	margin: 0px;
 	padding: 0px;
 	overflow: hidden;
@@ -8,7 +8,7 @@
 
 input, textarea, pre, p {
 	font: Arial,Helvetica,sans-serif;
-    font-size: 80% !important;
+    font-size: 90% !important;
 }
 
 a {
