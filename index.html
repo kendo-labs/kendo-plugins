@@ -5,20 +5,23 @@
 <head>
     <title>Kendo Plugins</title>
     <link href="http://cdn.kendostatic.com/2013.1.319/styles/kendo.common.min.css" rel="stylesheet" />
-    <link href="http://cdn.kendostatic.com/2013.1.319/styles/kendo.bootstrap.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2013.1.319/styles/kendo.default.min.css" rel="stylesheet" />
     <link href="Web/All/styles/kendo.web.plugins.css" rel="stylesheet" />
     <link href="Pages/Content/Rainbow/tricolore.css" rel="stylesheet" />
+    <link href="Pages/Content/buttontabstrip.css" rel="stylesheet" />
     <link href="Pages/Content/site.css" rel="stylesheet" />
     <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 </head>
 <body>
-    <div id="mainLayout">
+    <div id="mainLayout" style="overflow:hidden;">
         <div id="headerPane">
-            <a href="#/"><div id="headerTitle">Kendo UI Plugins Examples</div></a>
+            <img src="http://docs.kendoui.com/App_Themes/Kendo/images/kendo-warrior.png" height="30px" style="margin-left:5px;margin-top:5px;" />
+            <div id="headerTitle">Kendo UI Plugins</div>
         </div>
-        <div id="navigationPane">
-            <div class="pane-content" style="display:none;">
-                <ul id="navigationTreeView">
+		
+        <div id="mainPane">
+            <div id="navigationPane">
+                <ul id="navigationTreeView" style="display:none;">
                     <li>Web Plugins
                         <ul>
                             <li class="nav-page-route" data-hash="/GettingStarted">Getting Started</li>
@@ -32,12 +35,9 @@
                     </li>
                 </ul>
             </div>
-        </div>
 
-        <div id="contentPane">
-            <div id="contentHeading"></div>
-            <div class="pane-content" style="display:none;">
-                <div id="contentTabStrip" style="display: none;">
+            <div id="contentPane">
+                <div id="contentTabStrip" class="button-tabstrip" style="display:none;">
                     <ul>
                         <li class="hidden-tab">Overview</li>
                         <li class="hidden-tab">Examples</li>
@@ -57,6 +57,7 @@
 
 	<script src="Pages/Scripts/Rainbow/rainbow.js"></script>
 	<script src="Pages/Scripts/Rainbow/rainbow.html.js"></script>
+	<script src="Pages/Scripts/Rainbow/rainbow.javascript.js"></script>
 
     <script src="http://demos.kendoui.com/content/shared/js/people.js"></script>
 
