@@ -35,20 +35,24 @@
     <button id="clearGrid" class="k-button">Clear Grid</button>
 </div>
 
-<div id="extgrid"></div>
+<div id="emptyMessagesGrid"></div>
 
+
+<script>
+	var _people = createRandomData(25);
+</script>
 
 <script>
     $(function () {
         $("#populateGrid").on("click", function () {
-            $("#extgrid").data("kendoExtGrid").dataSource.data(createRandomData(25));
+            $("#emptyMessagesGrid").data("kendoExtGrid").dataSource.data(_people);
         });
 
         $("#clearGrid").on("click", function () {
-            $("#extgrid").data("kendoExtGrid").dataSource.data([]);
+            $("#emptyMessagesGrid").data("kendoExtGrid").dataSource.data([]);
         });
 
-        $("#extgrid").kendoExtGrid({
+        $("#emptyMessagesGrid").kendoExtGrid({
             dataSource: {
                 data: [],
                 pageSize: 5
@@ -57,11 +61,11 @@
                 {
                     field: "FirstName",
                     title: "First Name",
-                    width: "100px"
+                    width: "125px"
                 },{
                     field: "LastName",
                     title: "Last Name",
-                    width: 100
+                    width: 125
                 },{
                     field: "City",
                     width: 100
@@ -71,7 +75,7 @@
                     field: "BirthDate",
                     title: "Birth Date",
                     template: '#= kendo.toString(BirthDate,"MM/dd/yyyy") #',
-                    width: 100
+                    width: 125
                 },{
                     field: "Age",
                     width: 75
@@ -87,6 +91,55 @@
             messages: {
                 filterempty: "The filter that has been applied has returned nothing."
             }
+        });
+    });
+</script>
+
+<h2>Filter Bar and Columns DropDownList</h2>
+
+<div id="filterBarColumnsGrid" style="margin-bottom:20px;"></div>
+
+<script>
+    $(function () {
+        $("#filterBarColumnsGrid").kendoExtGrid({
+            dataSource: {
+                data: _people,
+                pageSize: 5
+            },
+            columns: [
+                {
+                    field: "FirstName",
+                    title: "First Name",
+                    width: "125px"
+                },{
+                    field: "LastName",
+                    title: "Last Name",
+                    width: 125
+                },{
+                    field: "City",
+                    width: 100
+                },{
+                    field: "Title"
+                },{
+                    field: "BirthDate",
+                    title: "Birth Date",
+                    template: '#= kendo.toString(BirthDate,"MM/dd/yyyy") #',
+                    width: 125
+                },{
+                    field: "Age",
+                    width: 75
+                }
+            ],
+			height: 350,
+            filterable: true,
+            sortable: true,
+            groupable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true
+            },
+			showFilterBar: true,
+			showToolBarColumnMenu: true
         });
     });
 </script>

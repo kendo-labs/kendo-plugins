@@ -20,51 +20,59 @@
         _router.route(kendo.format("{0}", args.route), function (plugin) {
             $(kendo.format("#navigationTreeView li.k-item[data-hash='{0}'] span", args.route)).addClass("k-state-selected");
 
-            // Load the overview for the plugin.
-            $(".overview-tab").load(kendo.format("{0}/overview.html", args.root), function (response, status, xhr) {
-                var $tab = $($("#contentTabStrip ul.k-tabstrip-items li.k-item")[0]);
-                if (status == "error") {
-                    $tab.addClass("hidden-tab");
-                } else {
-                    $tab.removeClass("hidden-tab");
-                }
+            var completed = {
+                overview: false,
+                examples: false,
+                documentation: false
+            };
 
-                // Load the examples for the plugin.
-                $(".examples-tab").load(kendo.format("{0}/examples.html", args.root), function (response, status, xhr) {
-                    var $tab = $($("#contentTabStrip ul.k-tabstrip-items li.k-item")[1]);
-                    if (status == "error") {
-                        $tab.addClass("hidden-tab");
-                    } else {
-                        $tab.removeClass("hidden-tab");
+            var loadCompleted = function () {
+                if (completed.overview === true &&
+                    completed.examples === true &&
+                    completed.documentation === true) {
+
+                    if (navigator.appVersion.indexOf("MSIE 8.0") == -1) {
+                        Rainbow.color();
                     }
 
-                    // Load the documentation for the plugin.
-                    $(".documentation-tab").load(kendo.format("{0}/documentation.html", args.root), function (response, status, xhr) {
-                        var $tab = $($("#contentTabStrip ul.k-tabstrip-items li.k-item")[2]);
-                        if (status == "error") {
-                            $tab.addClass("hidden-tab");
-                        } else {
-                            $tab.removeClass("hidden-tab");
-                        }
+                    setTimeout(function () {
+                        $("#contentTabStrip").data("kendoTabStrip").select(0);
+                        KendouiPlugins.Pages.App.resize(true);
+                    }, 100);
+                }
+            };
 
-                        // Show / Hide content tabstrip.
-                        if ($("#contentTabStrip .hidden-tab").length == 3) {
-                            $("#contentHeading").hide();
-                            $("#contentTabStrip").hide();
-                        } else {
-                            $("#contentHeading").show().text(kendo.format("{0}", args.title));
-                            $("#contentTabStrip").show();
+            // Load the overview for the plugin.
+            $(".overview-tab").load(kendo.format("{0}/overview.html", args.root), function (response, status, xhr) {
+                if (status == "error") {
+                    $(".overview-tab").empty();
+                }
+                completed.overview = true;
+                loadCompleted();
+            });
 
-                            setTimeout(function () {
-                                $("#contentTabStrip").data("kendoTabStrip").select(0);
-                            });
+            // Load the examples for the plugin.
+            $(".examples-tab").load(kendo.format("{0}/examples.html", args.root), function (response, status, xhr) {
+                if (status == "error") {
+                    $(".examples-tab").empty();
+                    $($("#contentTabStrip li")[1]).hide();
+                } else {
+                    $($("#contentTabStrip li")[1]).show();
+                }
+                completed.examples = true;
+                loadCompleted();
+            });
 
-                            if (navigator.appVersion.indexOf("MSIE 8.0") == -1) {
-                                Rainbow.color();
-                            }
-                        }
-                    });
-                });
+            // Load the documentation for the plugin.
+            $(".documentation-tab").load(kendo.format("{0}/documentation.html", args.root), function (response, status, xhr) {
+                if (status == "error") {
+                    $(".documentation-tab").empty();
+                    $($("#contentTabStrip li")[2]).hide();
+                } else {
+                    $($("#contentTabStrip li")[2]).show();
+                }
+                completed.documentation = true;
+                loadCompleted();
             });
         });
     };

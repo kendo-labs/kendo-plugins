@@ -1,53 +1,74 @@
 ﻿KendouiPlugins.Pages.App = function (kendo, $) {
+    var _height = 0;
+    var _treeView = null;
+    var _tabStrip = null;
+
     init = function () {
-        $("#mainSplitter").kendoSplitter({
-            items: [
-            {
-                title: "Header",
-                region: "north",
-                content: "#headerPane",
-                showTitlebar: false,
-                resizable: false,
-                size: "50px"
-            }, {
-                title: "Navigation",
-                region: "west",
-                content: "#navigationPane",
-                collapsible: true,
-                size: "275px"
-            }, {
-                title: "Source Code",
-                region: "east",
-                content: "#sourceCodePane",
-                collapsible: true,
-                size: "450px"
-            }, {
-                region: "center",
-                content: "#contentPane"
-            }]
-        });
+		$("#mainLayout").kendoSplitter({
+		    orientation: "vertical",
+		    panes: [
+                { size: 40, resizable: false },
+                { resizable: false }
+		    ]
+		});
 
-        $("#navigationTreeView").kendoTreeView({
-            select: function (e) {
-                var $node = $(e.node);
-                var hash = $node.attr("data-hash");
-                if (hash != undefined) {
-                    window.location.hash = hash;
-                }
+		$("#mainPane").kendoSplitter({
+		    panes: [
+                { size: 200 }
+		    ]
+		});
+
+		_treeView = $("#navigationTreeView").kendoTreeView({
+		    select: function (e) {
+		        var $node = $(e.node);
+		        var hash = $node.attr("data-hash");
+		        if (hash != undefined) {
+		            window.location.hash = hash;
+		        }
+		    }
+		}).data("kendoTreeView");
+		_treeView.expand(".k-item");
+		_treeView.element.show();
+
+		_tabStrip = $("#contentTabStrip").kendoTabStrip({
+		    activate: function() {
+		        $(document).trigger(KendouiPlugins.Pages.Router.url());
+
+		        setTimeout(function () {
+		            KendouiPlugins.Pages.App.resize(true);
+		        });
+		    }
+		}).data("kendoTabStrip");
+		_tabStrip.select(0);
+		_tabStrip.element.show();
+
+		resize();
+    };
+
+    resize = function (force) {
+        setTimeout(function () {
+            var height = $(window).height();
+
+            if (height != _height || force) {
+                _height = height;
+
+                $("#mainLayout").height(_height - 10);
+                $("#mainLayout").data("kendoSplitter").trigger("resize");
+
+                $("#contentTabStrip .k-content").css({
+                    height: _height - 92
+                });
             }
-        }).data("kendoTreeView").expand(".k-item");
 
-        $("#contentTabStrip").kendoTabStrip({
-            activate: function() {
-                $(document).trigger(KendouiPlugins.Pages.Router.url());
+            if (typeof force === "undefined") {
+                resize();
             }
-        }).data("kendoTabStrip").select(0);
-
-        $(".pane-content").show();
+        }, 250);
     };
 
     return {
-        init: init
+        init: init,
+        resize: resize
     };
 }(window.kendo, jQuery);
 
