@@ -1,1 +1,260 @@
-﻿Coming Soon
+﻿<!-- Alert Dialog -->
+
+<h2>Alert Dialog : kendo.ui.ExtAlertDialog</h2>
+
+<div class="section-title">Configuration</div>
+<div class="section">
+    <div><span class="property-title">message</span> <span class="property-type">: String</span></div>
+    <div class="property-section">
+        Message to be displayed to the user.
+    </div>
+
+    <div><span class="property-title">icon</span> <span class="property-type">: String</span></div>
+    <div class="property-section">
+        The CSS Class of the image to be displayed.  Images provided are:
+        <ul>
+            <li>Information: k-ext-information</li>
+            <li>Question: k-ext-question</li>
+            <li>Warning: k-ext-warning</li>
+            <li>Error: k-ext-error</li>
+        </ul>
+    </div>
+</div>
+
+<div class="section-title">Methods</div>
+<div class="section">
+    <div><span class="property-title">show</span></div>
+    <div class="property-section">
+        Show the alert dialog.
+    </div>
+    <div><span class="subsection-title">Parameters</span></div>
+    <div class="property-section">
+        <div><span class="parameter-title">options</span> <span class="parameter-type">: JSON Object</span></div>
+        <div class="property-section">
+            Configuration options used to display the alert dialog.
+        </div>
+    </div>
+    <div><span class="subsection-title">Return</span></div>
+    <div>
+        <div><span class="parameter-type">jQuery.Deferred Object</span></div>
+        <div class="property-section">
+            jQuery Deferred object. When the Deferred object is resolved, any done callbacks are executed when the user clicks on the OK button.
+        </div>
+    </div>
+
+    <div><span class="property-title">hide</span></div>
+    <div class="property-section">
+        Hide the alert dialog.
+    </div>
+</div>
+
+
+<!-- OK/Cancel Dialog -->
+
+<h2>OK/Cancel Dialog : kendo.ui.ExtOkCancelDialog</h2>
+
+<div class="section-title">Configuration</div>
+<div class="section">
+    <div><span class="property-title">message</span> <span class="property-type">: String</span></div>
+    <div class="property-section">
+        Message to be displayed to the user.
+    </div>
+
+    <div><span class="property-title">icon</span> <span class="property-type">: String</span></div>
+    <div class="property-section">
+        The CSS Class of the image to be displayed.  Images provided are:
+        <ul>
+            <li>Information: k-ext-information</li>
+            <li>Question: k-ext-question</li>
+            <li>Warning: k-ext-warning</li>
+            <li>Error: k-ext-error</li>
+        </ul>
+    </div>
+</div>
+
+<div class="section-title">Methods</div>
+<div class="section">
+    <div><span class="property-title">show</span></div>
+    <div class="property-section">
+        Show the ok/cancel dialog.
+    </div>
+    <div><span class="subsection-title">Parameters</span></div>
+    <div class="property-section">
+        <div><span class="parameter-title">options</span> <span class="parameter-type">: JSON Object</span></div>
+        <div class="property-section">
+            Configuration options used to display the ok/cancel dialog.
+        </div>
+    </div>
+    <div><span class="subsection-title">Return</span></div>
+    <div>
+        <div><span class="parameter-type">jQuery.Deferred Object</span></div>
+        <div class="property-section">
+            jQuery Deferred object. When the Deferred object is resolved, any done callbacks are 
+            executed when the user clicks on the OK or Cancel button.  The argument returned is
+            a JSON Object with the following attributes:
+            <ul>
+                <li>button (String): the button that was clicked.</li>
+                <li>input (String): the input entered by the user.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div><span class="property-title">hide</span></div>
+    <div class="property-section">
+        Hide the ok/cancel dialog.
+    </div>
+</div>
+
+
+<!-- Yes/No Dialog -->
+
+<h2>Yes/No Dialog : kendo.ui.ExtYesNoDialog</h2>
+
+<div class="section-title">Configuration</div>
+<div class="section">
+    <div><span class="property-title">message</span> <span class="property-type">: String</span></div>
+    <div class="property-section">
+        Message to be displayed to the user.
+    </div>
+
+    <div><span class="property-title">icon</span> <span class="property-type">: String</span></div>
+    <div class="property-section">
+        The CSS Class of the image to be displayed.  Images provided are:
+        <ul>
+            <li>Information: k-ext-information</li>
+            <li>Question: k-ext-question</li>
+            <li>Warning: k-ext-warning</li>
+            <li>Error: k-ext-error</li>
+        </ul>
+    </div>
+</div>
+
+<div class="section-title">Methods</div>
+<div class="section">
+    <div><span class="property-title">show</span></div>
+    <div class="property-section">
+        Show the yes/no dialog.
+    </div>
+    <div><span class="subsection-title">Parameters</span></div>
+    <div class="property-section">
+        <div><span class="parameter-title">options</span> <span class="parameter-type">: JSON Object</span></div>
+        <div class="property-section">
+            Configuration options used to display the yes/no dialog.
+        </div>
+    </div>
+    <div><span class="subsection-title">Return</span></div>
+    <div>
+        <div><span class="parameter-type">jQuery.Deferred Object</span></div>
+        <div class="property-section">
+            jQuery Deferred object. When the Deferred object is resolved, any done callbacks are 
+            executed when the user clicks on the Yes or No button.  The argument returned is
+            a JSON Object with the following attributes:
+            <ul>
+                <li>button (String): the button that was clicked.</li>
+                <li>input (String): the input entered by the user.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div><span class="property-title">hide</span></div>
+    <div class="property-section">
+        Hide the yes/no dialog.
+    </div>
+</div>
+
+
+<!-- Wait Dialog -->
+
+<h2>Wait Dialog : kendo.ui.ExtWaitDialog</h2>
+
+<div class="section-title">Configuration</div>
+<div class="section">
+    <div><span class="property-title">message</span> <span class="property-type">: String</span></div>
+    <div class="property-section">
+        Message to be displayed to the user.
+    </div>
+</div>
+
+<div class="section-title">Methods</div>
+<div class="section">
+    <div><span class="property-title">show</span></div>
+    <div class="property-section">
+        Show the wait dialog.
+    </div>
+    <div><span class="subsection-title">Parameters</span></div>
+    <div class="property-section">
+        <div><span class="parameter-title">options</span> <span class="parameter-type">: JSON Object</span></div>
+        <div class="property-section">
+            Configuration options used to display the wait dialog.
+        </div>
+    </div>
+    <div><span class="subsection-title">Return</span></div>
+    <div>
+        <div><span class="parameter-type">jQuery.Deferred Object</span></div>
+        <div class="property-section">
+            The jQuery Deferred object is resolved when the wait dialog
+            has finished initializing.
+        </div>
+    </div>
+
+    <div><span class="property-title">hide</span></div>
+    <div class="property-section">
+        Hide the wait dialog.
+    </div>
+</div>
+
+
+<!-- Input Dialog -->
+
+<h2>Input Dialog : kendo.ui.ExtInputDialog</h2>
+
+<div class="section-title">Configuration</div>
+<div class="section">
+    <div><span class="property-title">message</span> <span class="property-type">: String</span></div>
+    <div class="property-section">
+        Message prompt to be displayed to the user.
+    </div>
+
+    <div><span class="property-title">required</span> <span class="property-type">: Boolean</span></div>
+    <div class="property-section">
+        Indicates whether a value must be entered in the input field.
+    </div>
+
+    <div><span class="property-title">requiredCss</span> <span class="property-type">: String</span></div>
+    <div class="property-section">
+        The CSS Class to be applied to the input field if a value is required and empty when the user clicks the OK button.
+    </div>
+</div>
+
+<div class="section-title">Methods</div>
+<div class="section">
+    <div><span class="property-title">show</span></div>
+    <div class="property-section">
+        Show the input dialog.
+    </div>
+    <div><span class="subsection-title">Parameters</span></div>
+    <div class="property-section">
+        <div><span class="parameter-title">options</span> <span class="parameter-type">: JSON Object</span></div>
+        <div class="property-section">
+            Configuration options used to display the input dialog.
+        </div>
+    </div>
+    <div><span class="subsection-title">Return</span></div>
+    <div>
+        <div><span class="parameter-type">jQuery.Deferred Object</span></div>
+        <div class="property-section">
+            jQuery Deferred object. When the Deferred object is resolved, any done callbacks are 
+            executed when the user clicks on the OK or Cancel button.  The argument returned is
+            a JSON Object with the following attributes:
+            <ul>
+                <li>button (String): the button that was clicked.</li>
+                <li>input (String): the input entered by the user.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div><span class="property-title">hide</span></div>
+    <div class="property-section">
+        Hide the input dialog.
+    </div>
+</div>

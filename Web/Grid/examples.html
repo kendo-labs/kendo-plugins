@@ -37,6 +37,58 @@
 
 <div id="emptyMessagesGrid"></div>
 
+<div class="section-title">HTML Code</div>
+<div class="sample-code">
+<pre><code data-language="html">
+    &lt;div id="emptyMessagesGrid">&lt;/div>
+</code></pre>
+</div>
+
+<div class="section-title">JavaScript Code</div>
+<div class="sample-code">
+<pre><code data-language="javascript">
+    $("#emptyMessagesGrid").kendoExtGrid({
+        dataSource: {
+            data: [],
+            pageSize: 5
+        },
+        columns: [
+            {
+                field: "FirstName",
+                title: "First Name",
+                width: "125px"
+            },{
+                field: "LastName",
+                title: "Last Name",
+                width: 125
+            },{
+                field: "City",
+                width: 100
+            },{
+                field: "Title"
+            },{
+                field: "BirthDate",
+                title: "Birth Date",
+                template: '#= kendo.toString(BirthDate,"MM/dd/yyyy") #',
+                width: 125
+            },{
+                field: "Age",
+                width: 75
+            }
+        ],
+        filterable: true,
+        sortable: true,
+        groupable: true,
+        pageable: {
+            refresh: true,
+            pageSizes: true
+        },
+        messages: {
+            filterempty: "The filter that has been applied has returned nothing."
+        }
+    });
+</code></pre>
+</div>
 
 <script>
 	var _people = createRandomData(25);
