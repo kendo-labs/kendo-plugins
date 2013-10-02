@@ -51,7 +51,20 @@ body {
     margin-top:5px;
 }
 
+.k-ext-grid-filterbar {
+	border-style: solid;
+    border-width: 1px 0 0;
+	line-height: 24px;
+	overflow: auto;
+	padding: 4px 0 4px 3px;
+}
 
+    .k-ext-grid-filterbar button.k-ext-grid-filterbutton {
+        margin-right: 5px;
+        float: right;
+    }
+
+	
 /* ExtSplitter */
 
 .k-ext-layout-header {

@@ -47,7 +47,7 @@
 
     resize = function (force) {
         setTimeout(function () {
-            var height = $(window).height();
+            var height = $(document).height();
 
             if (height != _height || force) {
                 _height = height;

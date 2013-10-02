@@ -316,4 +316,59 @@
             $("#extWaitDialog").data("kendoWindow").close();
         }
     };
+    
+    /*
+     *
+     * YesNoCancelDialog
+     *
+     */
+
+    kendo.ui.ExtYesNoCancelDialog = {
+        show: function (options) {
+            return new $.Deferred(function (deferred) {
+                if ($("#ExtYesNoCancelDialog").length > 0) {
+                    $("#ExtYesNoCancelDialog").parent().remove();
+                }
+
+                options = $.extend({
+                    width: "350px",
+                    height: "100px",
+                    buttons: [{
+                        name: "Yes",
+                        click: function (e) {
+                            $("#ExtYesNoCancelDialog").data("kendoExtDialog").close();
+                            deferred.resolve({ button: "Yes" });
+                        }
+                    }, {
+                        name: "No",
+                        click: function (e) {
+                            $("#ExtYesNoCancelDialog").data("kendoExtDialog").close();
+                            deferred.resolve({ button: "No" });
+                        }
+                    },
+                    {
+                        name: "Cancel",
+                        click: function (e) {
+                            $("#ExtYesNoCancelDialog").data("kendoExtDialog").close();
+                            deferred.resolve({ button: "Cancel" });
+                        }
+                    }],
+                    modal: true,
+                    visible: false,
+                    message: "",
+                    icon: "k-ext-information"
+                }, options);
+
+                $(document.body).append(kendo.format("<div id='ExtYesNoCancelDialog' style='position:relative;'><div style='position:absolute;left:10px;top:10px;' class='{0}'></div><div style='display:inline-block;margin-left:45px;'>{1}</div></div>", options.icon, options.message));
+                $("#ExtYesNoCancelDialog").kendoExtDialog(options);
+                $("#ExtYesNoCancelDialog").parent().find("div.k-window-titlebar div.k-window-actions").empty();
+                $("#ExtYesNoCancelDialog").data("kendoExtDialog").center().open();
+            });
+        },
+
+        hide: function () {
+            $("#ExtYesNoCancelDialog").data("kendoExtDialog").close();
+        }
+    };
+    
 })(window.kendo, window.kendo.jQuery);
