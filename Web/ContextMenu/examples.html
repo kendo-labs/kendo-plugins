@@ -130,7 +130,7 @@
 <script>
     $(function () {
         $("#itemcontextmenu").kendoExtContextMenu({
-            targets: "#contextMenuTarget",
+            targets: "#contextMenuTarget, #treeview .k-item .furniture, #treeview .k-item .decor",
             itemSelect: function (e) {
                 var msg = kendo.format('You selected: "{0}" on "{1}"',
                     $(e.item).text().trim(),

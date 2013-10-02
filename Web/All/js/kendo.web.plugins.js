@@ -777,7 +777,7 @@
             } else {
                 that.hide();
             }
-        },
+        }
     });
     kendo.ui.plugin(ExtContextMenu);
 })(window.kendo.jQuery, window.kendo);
