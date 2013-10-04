@@ -13,6 +13,7 @@
         { route: "/DropDownGrid", root: "Web/DropDownGrid", title: "DropDownGrid" },
         { route: "/DropDownTreeView", root: "Web/DropDownTreeView", title: "DropDownTreeView" },
         { route: "/Grid", root: "Web/Grid", title: "Grid" },
+        { route: "/Textbox", root: "Web/Textbox", title: "Textbox" },
         { route: "/GoogleMaps", root: "Web/GoogleMaps", title: "Google Maps" }
     ];
 

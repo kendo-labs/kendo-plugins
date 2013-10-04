@@ -1,0 +1,97 @@
+﻿<h2>Examples of the Textbox widget</h2>
+
+<style>
+    .textbox-wrapper {
+        margin-bottom: 15px;
+        display:block !important;
+    }
+    .required-field {
+        color: #f78181 !important;
+    }
+</style>
+
+<p>Textbox that displays an initial value.</p>
+<input id="givenname" />
+<p>Textbox that displays a placeholder and applies a CSS Class to the placeholder.</p>
+<input id="surname" />
+<p>Textbox without a placeholder.</p>
+<div class="textbox-wrapper">
+    <span>Title:</span> <input id="title" />
+</div>
+
+<div class="property-title">HTML Code</div>
+<div class="sample-code">
+<pre><code data-language="html">
+    &lt;input id="givenname" />
+    &lt;input id="surname" />
+    &lt;div>
+        &lt;span>Title:&lt;/span> &lt;input id="title" />
+    &lt;/div>
+</code></pre>
+</div>
+
+<div class="property-title">JavaScript Code</div>
+<div class="sample-code">
+<pre><code data-language="javascript">
+    $("#givenname").kendoExtTextBox({
+        placeholder: {
+            text: "Enter given name"
+        },
+        text: "John",
+        wrapper: {
+            cssClass: "textbox-wrapper"
+        }
+    });
+
+    $("#surname").kendoExtTextBox({
+        placeholder: {
+            text: "Enter surname",
+            cssClass: "required-field"
+        },
+        wrapper: {
+            cssClass: "textbox-wrapper"
+        }
+    });
+
+    $("#title").kendoExtTextBox();
+</code></pre>
+</div>
+
+<div class="property-title">CSS Code</div>
+<div class="sample-code">
+<pre><code data-language="css">
+    .textbox-wrapper {
+        margin-bottom: 5px;
+        display:block !important;
+    }
+    .required-field {
+        color: #f78181 !important;
+    }
+</code></pre>
+</div>
+
+<script>
+    $(function () {
+        $("#givenname").kendoExtTextBox({
+            placeholder: {
+                text: "Enter given name"
+            },
+            text: "John",
+            wrapper: {
+                cssClass: "textbox-wrapper"
+            }
+        });
+
+        $("#surname").kendoExtTextBox({
+            placeholder: {
+                text: "Enter surname",
+                cssClass: "required-field"
+            },
+            wrapper: {
+                cssClass: "textbox-wrapper"
+            }
+        });
+
+        $("#title").kendoExtTextBox();
+    });
+</script>
