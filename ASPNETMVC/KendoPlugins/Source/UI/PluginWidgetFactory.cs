@@ -14,5 +14,10 @@ namespace Kendo.Mvc.UI.Fluent
         {
             return new ButtonBuilder(new Button(widgetFactory.HtmlHelper.ViewContext, widgetFactory.Initializer, widgetFactory.UrlGenerator));
         }
+
+        public static TextboxBuilder Textbox(this WidgetFactory widgetFactory)
+        {
+            return new TextboxBuilder(new Textbox(widgetFactory.HtmlHelper.ViewContext, widgetFactory.Initializer, widgetFactory.UrlGenerator));
+        }
     }
 }
