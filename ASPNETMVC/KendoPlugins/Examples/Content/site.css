@@ -1,0 +1,109 @@
+﻿html, body {
+	font: Arial,Helvetica,sans-serif;
+    font-size: 90% !important;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+}
+
+input, textarea, pre, p {
+	font: Arial,Helvetica,sans-serif;
+    font-size: 90% !important;
+}
+
+a {
+    text-decoration: none;
+    color: darkred;
+}
+    a:hover {
+        font-weight: bold;
+    }
+
+#headerPane {
+    background-color: black;
+}
+
+#headerTitle {
+    font-size: 24px;
+    margin: 4px 4px 4px 4px;
+    color: white;
+    position: absolute;
+    top: 0px;
+    margin-left:35px;
+}
+
+#mainPane, #contentPane {
+    overflow: hidden;
+}
+
+#contentTabStrip .k-content {
+    overflow: auto !important;
+    padding: 5px;
+}
+
+/* DOCUMENTATION */
+
+.section, .property-section, .note-section {
+    margin-left: 20px;
+    position: relative;
+}
+
+.property-section {
+    margin-bottom: 10px;
+}
+
+.section-title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+.subsection-title, .property-title {
+    font-size: 12px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.subsection-title {
+    font-style: italic;
+}
+
+.property-title {
+    font-weight: bold;
+}
+
+.property-type {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+.parameter-title {
+    font-weight: bold;
+}
+.parameter-type {
+    font-style: italic;
+}
+
+.external-link-image {
+    background-image: url('./Images/external-link.gif');
+    height: 16px;
+    width: 16px;
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+div.sample-code {
+    margin-left: 20px;
+    margin-right: 20px;
+    border: 1px gray solid;
+    background-color: snow;
+}
+
+    div.sample-code pre {
+        padding: 0px 0px 0px 0px !important;
+        background-color: snow;
+    }

@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Kendo MVC Plugins Examples";
+}
+
+<div id="mainLayout" style="overflow:hidden;">
+    <div id="headerPane">
+        <img src="http://docs.kendoui.com/App_Themes/Kendo/images/kendo-warrior.png" height="30px" style="margin-left:5px;margin-top:5px;" />
+        <div id="headerTitle">Kendo ASP.NET MVC Plugins <span style="color:salmon;font-weight:bold;">Coming Soon</span></div>
+    </div>
+		
+    <div id="mainPane">
+        <div id="navigationPane">
+            <ul id="navigationTreeView" style="display:none;">
+                <li>Web MVC Plugins
+                    <ul>
+                        <li class="nav-page-route" data-hash="/GettingStarted">Getting Started</li>
+                        <li class="nav-page-route" data-hash="/Button">Button</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div id="contentPane">
+            <div id="contentTabStrip" class="button-tabstrip" style="display:none;">
+                <ul>
+                    <li class="hidden-tab">Overview</li>
+                    <li class="hidden-tab">Examples</li>
+                    <li class="hidden-tab">Documentation</li>
+                </ul>
+                <div class="overview-tab"></div>
+                <div class="examples-tab"></div>
+                <div class="documentation-tab"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- EXAMPLES JS -->
+<script>var KendouiPlugins = { MVC: {} };</script>
+<script src="@Url.Content("~/Scripts/app.js")"></script>
+<script src="@Url.Content("~/Scripts/router.js")"></script>

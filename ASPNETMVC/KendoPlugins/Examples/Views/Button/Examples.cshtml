@@ -1,0 +1,33 @@
+﻿<h2>Example of the Kendo Plugins Button Helper</h2>
+
+<script>
+    buttonclick = function () {
+        alert("You clicked me!");
+    }
+</script>
+
+@(Html.Kendo().Button()
+    .Name("button")
+    .Text("Click Me")
+    .Events(e => e.Click("buttonclick"))
+)
+
+<div class="property-title">HTML Code</div>
+<div class="sample-code">
+<pre><code data-language="html">
+    @(Html.Encode("@"))(Html.Kendo().Button()
+        .Name("button")
+        .Text("Hello")
+        .Events(e => e.Click("buttonclick"))
+    )
+</code></pre>
+</div>
+
+<div class="property-title">JavaScript Code</div>
+<div class="sample-code">
+<pre><code data-language="javascript">
+    buttonclick = function () {
+        alert("You clicked me!");
+    }
+</code></pre>
+</div>

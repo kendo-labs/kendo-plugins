@@ -1,0 +1,68 @@
+﻿<h2>About Kendo Plugins</h2>
+
+<p>
+    Kendo Plugins is a library of third party widgets and controls written for Kendo UI by the community.
+</p>
+
+<h2>Getting Started with Kendo UI Web Plugins</h2>
+
+<h3>Using Kendo UI Web Plugins in ASP.NET MVC 3 application</h3>
+<div style="margin-left:20px;">
+    <ol>
+        <li>Follow the instructions to configure an ASP.NET MVC application with Kendo UI at the: <a href="http://docs.kendoui.com/getting-started/using-kendo-with/aspnet-mvc/introduction">Kendo UI Docs Website</a>
+        </li>
+        <li>Download the Kendo UI Web Plugins <!--from <a href="https://github.com/kendo-labs/kendo-plugins/tree/master/Web/All">https://github.com/kendo-labs/kendo-plugins/tree/master/Web/All</a> -->
+            <ol>
+                <li>Reference the kendo.web.plugins.min.css file.</li>
+                <li>Reference the kendo.web.plugins.min.js file.</li>
+                <li>Reference the kendo.aspnetmvc.plugins.min.js file.</li>
+            </ol>
+        </li>
+        <li>Download the Kendo UI ASP.NET MVC Plugins Assembly <!--from <a href="https://github.com/kendo-labs/kendo-plugins/tree/master/Web/All">https://github.com/kendo-labs/kendo-plugins/tree/master/Web/All</a> -->
+            <ol>
+                <li>Reference the Kendo.Mvc.Plugins.dll assembly.</li>
+                <li>In addition to adding the Kendo.Mvc.UI namespace in the Views/web.config file, also add the Kendo.Mvc.UI.Fluent namespace.</li>
+            </ol>
+        </li>
+    </ol>
+
+    <div class="section-title">Referencing the client-side files</div>
+    <h3>WebForms:</h3>
+    <div style="color:red;">Coming Soon</div>
+
+    <h3>Razor:</h3>
+    <div class="sample-code">
+        <pre><code data-language="html">
+        &lt;link rel="stylesheet" href="@Url.Content("~/Content/kendo.common.min.css")">
+        &lt;link rel="stylesheet" href="@Url.Content("~/Content/kendo.default.min.css")">
+        &lt;link rel="stylesheet" href="@Url.Content("~/Content/kendo.web.plugins.css")">
+
+        &lt;script src="@Url.Content("~/Scripts/jquery.min.js")">&lt;/script>
+        &lt;script src="@Url.Content("~/Scripts/kendo.all.min.js")">&lt;/script>
+        &lt;script src="@Url.Content("~/Scripts/kendo.aspnetmvc.min.js")">&lt;/script>
+        &lt;script src="@Url.Content("~/Scripts/kendo.plugins.aspnetmvc.js")">&lt;/script>
+    </code></pre>
+    </div>
+
+    <div class="section-title">Reference the Kendo.Mvc.UI.Fluent namespace in the Views/web.config file.</div>
+    <h3>WebForms:</h3>
+    <div style="color:red;">Coming Soon</div>
+
+    <h3>Razor:</h3>
+    <div class="sample-code">
+        <pre><code data-language="html">
+        &lt;system.web.webPages.razor>
+            &lt;pages pageBaseType="System.Web.Mvc.WebViewPage">
+                &lt;namespaces>
+                    &lt;add namespace="System.Web.Mvc" />
+                    &lt;add namespace="System.Web.Mvc.Ajax" />
+                    &lt;add namespace="System.Web.Mvc.Html" />
+                    &lt;add namespace="System.Web.Routing" />
+                    &lt;add namespace="Kendo.Mvc.UI" />
+                    &lt;add namespace="Kendo.Mvc.UI.Fluent" />
+                &lt;/namespaces>
+            &lt;/pages>
+        &lt;/system.web.webPages.razor>
+    </code></pre>
+    </div>
+</div>

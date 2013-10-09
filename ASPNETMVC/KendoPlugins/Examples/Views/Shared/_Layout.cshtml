@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <!-- KENDO UI CSS -->
+    <link href="http://cdn.kendostatic.com/2013.1.319/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2013.1.319/styles/kendo.default.min.css" rel="stylesheet" />
+
+    <!-- KENDO UI JS -->
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="http://cdn.kendostatic.com/2013.1.319/js/kendo.all.min.js"></script>
+	<script src="http://cdn.kendostatic.com/2013.1.319/js/kendo.aspnetmvc.min.js"></script>
+    <script src="@Url.Content("~/Scripts/kendo.plugins.aspnetmvc.js")"></script>
+
+    <!-- RAINBOW CSS -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/Rainbow/tricolore.css")">
+
+    <!-- RAINBOW JS -->
+    <script src="@Url.Content("~/Scripts/Rainbow/rainbow.js")"></script>
+    <script src="@Url.Content("~/Scripts/Rainbow/rainbow.generic.js")"></script>
+
+    <!-- EXAMPLES CSS -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/buttontabstrip.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/site.css")">
+</head>
+
+<body>
+    @RenderBody()
+</body>
+</html>
