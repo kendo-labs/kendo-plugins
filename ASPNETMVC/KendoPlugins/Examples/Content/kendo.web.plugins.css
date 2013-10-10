@@ -1,0 +1,206 @@
+﻿/*
+/// <version>2013.06.27</version>
+/// <summary>All the Kendo UI Web Plugins for Kendo UI 2013 Q1 and jQuery 1.9.1</summary>
+*/
+
+/* General */
+
+/* Times New is fugly */
+body {
+  font-family: Tahoma, sans-serif;
+}
+
+.k-ext-required {
+    background-color: pink;
+}
+
+
+/* ExtContextMenu */
+
+.k-ext-contextmenu
+{
+    z-index: 9999;
+}
+
+.k-ext-contextmenu li
+{
+    display:block;
+    width: 100%;
+}
+    .k-ext-contextmenu li .k-link
+    {
+        width: 100%;
+    }
+
+.k-ext-contextmenu li.k-ext-menu-separator
+{
+    border-bottom-style: solid;
+    border-bottom-width: 1px !important;
+    height: 1px;
+}
+    .k-ext-contextmenu li.k-ext-menu-separator *
+    {
+        display:none;
+    }
+
+
+/* ExtGrid */
+
+.ext-grid-empty-msg {
+    margin-left:5px;
+    margin-top:5px;
+}
+
+.k-ext-grid-filterbar {
+	border-style: solid;
+    border-width: 1px 0 0;
+	line-height: 24px;
+	overflow: auto;
+	padding: 4px 0 4px 3px;
+}
+
+    .k-ext-grid-filterbar button.k-ext-grid-filterbutton {
+        margin-right: 5px;
+        float: right;
+    }
+
+	
+/* ExtSplitter */
+
+.k-ext-layout-header {
+    margin-top:0px;
+    position: relative;
+}
+
+.k-ext-layout-title {
+    font-size:14px;
+    font-weight:bold;
+}
+
+.k-ext-vertical-layout-title {
+    position: absolute; 
+    top: 30px !important;
+    text-align: center;
+    width: 14px;
+	margin-left: 3px;
+}
+
+.k-ext-arrows-left, .k-ext-arrows-right, .k-ext-arrows-up, .k-ext-arrows-down {
+	overflow: hidden;
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-image: url('./Images/small-sprites.gif') !important;
+	margin: 0;
+}
+
+.k-ext-arrows-left {
+	background-position: 0 -16px;
+}
+
+.k-ext-arrows-right {
+	background-position: -16px -16px;
+}
+
+.k-ext-arrows-up {
+	background-position: 0 0;
+}
+
+.k-ext-arrows-down {
+	background-position: -16px 0;
+}
+
+
+/* ExtDialog */
+
+.k-ext-information, .k-ext-question, .k-ext-warning, .k-ext-error {
+	overflow: hidden;
+	width: 32px;
+	height: 32px;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-image: url('./Images/medium-sprites.png');
+	margin: 0;
+}
+
+.k-ext-information {
+	background-position: 0 0;
+}
+
+.k-ext-question {
+	background-position: -32px 0;
+}
+
+.k-ext-warning {
+	background-position: -64px 0;
+}
+
+.k-ext-error {
+	background-position: -96px 0;
+}
+
+.k-ext-wait {
+	overflow: hidden;
+	width: 30px;
+	height: 30px;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-image: url('./Images/medium-wait.gif');
+	margin: 0;
+}
+
+
+/* ExtBorderLayout */
+
+.k-ext-inner-splitter-contents {
+    overflow: hidden !important;
+}
+
+
+
+/* ExtTextBox */
+
+.k-ext-textbox {
+	display:inline-block;
+	position:relative;
+	height:2.2em;
+}
+
+	.k-ext-textbox span, .k-ext-textbox input {
+		position:absolute !important;
+		top:0;
+		left:0;
+		margin:0.178em 0; 
+		height:1.6em; 
+		line-height:1.6em; 
+	}
+	
+	.k-ext-textbox span {
+		color:gray;
+		text-indent:4px;
+	}
+
+	.k-ext-textbox input {
+		opacity:1;
+		z-index:99; 
+		filter:alpha(opacity=100);
+		background: none;
+		width:99%;
+        box-shadow: 0 0 0 0;
+	}
+
+/* Maps */
+.map {
+  width: 480px;
+  height: 400px;
+}
+
+.map img { 
+  max-width: none;
+}
+
+.map label { 
+  width: auto; display:inline; 
+}

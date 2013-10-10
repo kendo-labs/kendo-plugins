@@ -53,6 +53,11 @@
     <Compile Include="UI\Button\Html\ButtonHtmlBuilder.cs" />
     <Compile Include="UI\PluginWidgetFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\Textbox\Fluent\TextboxBuilder.cs" />
+    <Compile Include="UI\Textbox\Fluent\TextboxPlaceholderBuilder.cs" />
+    <Compile Include="UI\Textbox\Fluent\TextboxWrapperBuilder.cs" />
+    <Compile Include="UI\Textbox\Html\TextboxHtmlBuilder.cs" />
+    <Compile Include="UI\Textbox\Textbox.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\kendo.plugins.aspnetmvc.js" />

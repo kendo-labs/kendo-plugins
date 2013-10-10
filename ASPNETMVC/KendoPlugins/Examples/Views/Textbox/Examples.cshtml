@@ -1,0 +1,45 @@
+﻿<h2>Example of the Kendo Plugins Textbox Helper</h2>
+
+<style type="text/css">
+    .placeholder {
+        color: lightsalmon !important;
+    }
+    .textbox {
+        margin-left: 10px;
+        margin-bottom: 10px;
+    }
+</style>
+
+@(Html.Kendo().Textbox()
+    .Name("textbox")
+    .Placeholder(ph => ph.Text("Firstname")
+        .CssClass("placeholder")
+    )
+    .Wrapper(w => w.CssClass("textbox"))
+)
+
+<div class="property-title">HTML Code</div>
+<div class="sample-code">
+<pre><code data-language="csharp">
+    @(Html.Encode("@"))(Html.Kendo().Textbox()
+        .Name("textbox")
+        .Placeholder(ph => ph.Text("Firstname")
+            .CssClass("placeholder")
+        )
+        .Wrapper(w => w.CssClass("textbox"))
+    )
+</code></pre>
+</div>
+
+<div class="property-title">CSS Code</div>
+<div class="sample-code">
+<pre><code data-language="css">
+    .placeholder {
+        color: lightsalmon !important;
+    }
+    .textbox {
+        margin-left: 10px;
+        margin-bottom: 10px;
+    }
+</code></pre>
+</div>

@@ -19,5 +19,13 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(builder);
             return this;
         }
+
+        public TextboxBuilder Wrapper(Action<TextboxWrapperBuilder> configurator)
+        {
+            TextboxWrapperBuilder builder = new TextboxWrapperBuilder();
+            (Component as Textbox).Wrapper = builder;
+            configurator(builder);
+            return this;
+        }
     }
 }

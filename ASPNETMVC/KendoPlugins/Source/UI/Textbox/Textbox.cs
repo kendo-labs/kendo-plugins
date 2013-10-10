@@ -30,11 +30,24 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public TextboxWrapperBuilder Wrapper
+        {
+            get;
+            set;
+        }
+
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = new Dictionary<string, object>(Events);
 
-            options["placeholder"] = this.Placeholder.ToJson();
+            if (this.Placeholder != null)
+            {
+                options["placeholder"] = this.Placeholder.ToJson();
+            }
+            if (this.Wrapper != null)
+            {
+                options["wrapper"] = this.Wrapper.ToJson();
+            }
             writer.Write(Initializer.Initialize(Selector, "ExtTextBox", options));
 
             base.WriteInitializationScript(writer);

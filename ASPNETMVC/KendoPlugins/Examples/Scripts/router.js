@@ -9,6 +9,7 @@
     var _routes = [
         { route: "/GettingStarted", root: "Home", title: "Getting Started" },
         { route: "/Button", root: "Button", title: "Button" },
+        { route: "/Textbox", root: "Textbox", title: "Textbox" }
     ];
 
     addRoute = function (args) {
