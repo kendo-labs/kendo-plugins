@@ -20,6 +20,7 @@ Kendo Plugins for previous versions of Kendo UI and jQuery can be found in the A
 ## Source Code and Downloads
 
 The Kendo Plugins repository is divided into the following folders:
+* **ASPNETMVC** - ASP.NET MVC Helpers for the Kendo Plugins (Currently Under Development).
 * **Archive** - Kendo Plugins for previous versions of Kendo UI.
 * **Web** - Kendo Plugins based on Kendo UI Web for the current version of Kendo UI.
 * **Mobile** - Kendo Plugins based on Kendo UI Mobile for the current version of Kendo UI.
@@ -53,6 +54,8 @@ For change logs and release notes, see the [changelog](CHANGELOG.md) file.
 
 ## Announcements
 
+* 09-OCT-2013
+ * The development of ASP.NET MVC Helpers for the Kendo Plugins has started.
 * 27-JUN-2013
  * GitHub Pages have been created.
 * 01-APR-2013
