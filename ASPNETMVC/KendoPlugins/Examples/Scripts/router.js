@@ -8,6 +8,7 @@
 
     var _routes = [
         { route: "/GettingStarted", root: "Home", title: "Getting Started" },
+        { route: "/ActionLink", root: "ActionLink", title: "ActionLink" },
         { route: "/Button", root: "Button", title: "Button" },
         { route: "/Textbox", root: "Textbox", title: "Textbox" }
     ];

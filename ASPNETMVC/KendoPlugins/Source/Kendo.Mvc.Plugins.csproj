@@ -47,6 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UI\ActionLink\ActionLink.cs" />
+    <Compile Include="UI\ActionLink\Fluent\ActionLinkBuilder.cs" />
+    <Compile Include="UI\ActionLink\Html\ActionLinkHtmlBuilder.cs" />
     <Compile Include="UI\Button\Button.cs" />
     <Compile Include="UI\Button\Fluent\ButtonBuilder.cs" />
     <Compile Include="UI\Button\Fluent\ButtonEventBuilder.cs" />

@@ -1,0 +1,22 @@
+﻿<h2>Example of the Kendo Plugins ActionLink Helper</h2>
+
+@(Html.Kendo().ActionLink()
+    .Name("actionlink")
+    .Style(ActionLinkStyle.Button)
+    .Text("Click Me")
+    .Controller("MyController")
+    .Action("MyAction")
+)
+
+<div class="property-title">HTML Code</div>
+<div class="sample-code">
+<pre><code data-language="csharp">
+    @(Html.Encode("@"))(Html.Kendo().ActionLink()
+        .Name("actionlink")
+        .Style(ActionLinkStyle.Button)
+        .Text("Click Me")
+        .Controller("MyController")
+        .Action("MyAction")
+    )
+</code></pre>
+</div>

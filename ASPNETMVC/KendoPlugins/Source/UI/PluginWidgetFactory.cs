@@ -10,6 +10,11 @@ namespace Kendo.Mvc.UI.Fluent
 {
     public static class PluginWidgetFactory
     {
+        public static ActionLinkBuilder ActionLink(this WidgetFactory widgetFactory)
+        {
+            return new ActionLinkBuilder(new ActionLink(widgetFactory.HtmlHelper.ViewContext, widgetFactory.Initializer, widgetFactory.UrlGenerator));
+        }
+
         public static ButtonBuilder Button(this WidgetFactory widgetFactory)
         {
             return new ButtonBuilder(new Button(widgetFactory.HtmlHelper.ViewContext, widgetFactory.Initializer, widgetFactory.UrlGenerator));
