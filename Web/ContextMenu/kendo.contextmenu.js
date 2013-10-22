@@ -256,6 +256,10 @@
             }
             this.hide();
         },
+        destroy: function() {
+        	var that = this;
+        	$(that.element).html('').remove();
+        }
     });
     kendo.ui.plugin(ExtContextMenu);
 })(jQuery, window.kendo);
