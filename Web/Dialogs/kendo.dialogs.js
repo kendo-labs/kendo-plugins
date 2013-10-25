@@ -109,7 +109,7 @@
                 }, options);
 
                 // Add a div to the html document for the alert dialog.
-                $(document.body).append(kendo.format("<div id='extAlertDialog' style='position:relative;'><div style='position:absolute;left:10px;top:10px;' class='{0}'></div><div style='display:inline-block;margin-left:45px;'>{1}</div></div>", options.icon, options.message));
+                $(document.body).append(kendo.format("<div id='extAlertDialog' style='position:relative;'><div style='position:absolute;left:10px;top:10px;' class='{0}'></div><div class='k-ext-dialog-message' style='display:inline-block;margin-left:45px;'>{1}</div></div>", options.icon, options.message));
 
                 // Create the alert dialog.
                 dialog = $("#extAlertDialog").kendoExtDialog(options).data("kendoExtDialog");
@@ -166,7 +166,7 @@
                     icon: "k-ext-information"
                 }, options);
 
-                $(document.body).append(kendo.format("<div id='extOkCancelDialog' style='position:relative;'><div style='position:absolute;left:10px;top:10px;' class='{0}'></div><div style='display:inline-block;margin-left:45px;'>{1}</div></div>", options.icon, options.message));
+                $(document.body).append(kendo.format("<div id='extOkCancelDialog' style='position:relative;'><div style='position:absolute;left:10px;top:10px;' class='{0}'></div><div class='k-ext-dialog-message' style='display:inline-block;margin-left:45px;'>{1}</div></div>", options.icon, options.message));
                 $("#extOkCancelDialog").kendoExtDialog(options);
                 $("#extOkCancelDialog").parent().find("div.k-window-titlebar div.k-window-actions").empty();
                 $("#extOkCancelDialog").data("kendoExtDialog").center().open();
@@ -211,7 +211,7 @@
                     icon: "k-ext-information"
                 }, options);
 
-                $(document.body).append(kendo.format("<div id='extYesNoDialog' style='position:relative;'><div style='position:absolute;left:10px;top:10px;' class='{0}'></div><div style='display:inline-block;margin-left:45px;'>{1}</div></div>", options.icon, options.message));
+                $(document.body).append(kendo.format("<div id='extYesNoDialog' style='position:relative;'><div style='position:absolute;left:10px;top:10px;' class='{0}'></div><div class='k-ext-dialog-message' style='display:inline-block;margin-left:45px;'>{1}</div></div>", options.icon, options.message));
                 $("#extYesNoDialog").kendoExtDialog(options);
                 $("#extYesNoDialog").parent().find("div.k-window-titlebar div.k-window-actions").empty();
                 $("#extYesNoDialog").data("kendoExtDialog").center().open();
@@ -303,7 +303,7 @@
                     message: ""
                 }, options);
 
-                $(document.body).append(kendo.format("<div id='extWaitDialog' style='position:relative;'><div style='position:absolute;left:10px;top:10px;' class='k-ext-wait'></div><div style='display:inline-block;margin-left:45px;'>{0}</div></div>", options.message));
+                $(document.body).append(kendo.format("<div id='extWaitDialog' style='position:relative;'><div style='position:absolute;left:10px;top:10px;' class='k-ext-wait'></div><div class='k-ext-dialog-message' style='display:inline-block;margin-left:45px;'>{0}</div></div>", options.message));
                 $("#extWaitDialog").kendoWindow(options);
                 $("#extWaitDialog").parent().find("div.k-window-titlebar div.k-window-actions").empty();
                 $("#extWaitDialog").data("kendoWindow").center().open();
@@ -316,8 +316,10 @@
             $("#extWaitDialog").data("kendoWindow").close();
         }
     };
-    
-     /*YesNoCancelDialog*/
+
+
+
+    /*YesNoCancelDialog*/
     kendo.ui.ExtYesNoCancelDialog = {
         show: function (options) {
             return new $.Deferred(function (deferred) {
@@ -354,7 +356,7 @@
                     icon: "k-ext-information"
                 }, options);
 
-                $(document.body).append(kendo.format("<div id='ExtYesNoCancelDialog' style='position:relative;'><div style='position:absolute;left:10px;top:10px;' class='{0}'></div><div style='display:inline-block;margin-left:45px;'>{1}</div></div>", options.icon, options.message));
+                $(document.body).append(kendo.format("<div id='ExtYesNoCancelDialog' style='position:relative;'><div style='position:absolute;left:10px;top:10px;' class='{0}'></div><div class='k-ext-dialog-message' style='display:inline-block;margin-left:45px;'>{1}</div></div>", options.icon, options.message));
                 $("#ExtYesNoCancelDialog").kendoExtDialog(options);
                 $("#ExtYesNoCancelDialog").parent().find("div.k-window-titlebar div.k-window-actions").empty();
                 $("#ExtYesNoCancelDialog").data("kendoExtDialog").center().open();
@@ -365,5 +367,5 @@
             $("#extYesNoDialog").data("kendoExtDialog").close();
         }
     };
-    
+
 })(window.kendo, window.kendo.jQuery);
