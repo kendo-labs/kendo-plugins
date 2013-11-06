@@ -1,7 +1,7 @@
-﻿/// <version>2013.05.24</version>
+/// <version>2013.05.22</version>
 /// <summary>Works with the Kendo UI 2013 Q1 and jQuery 1.9.1</summary>
 
-(function ($, kendo) {
+(function (kendo, $) {
     var ExtContextMenu = kendo.ui.Menu.extend({
         /// <summary>
         /// Context menu widget.
@@ -79,22 +79,23 @@
                 // When the user right-clicks on any of the targets, then display the context menu.
                 $(document).on(that.options.event, options.targets, function (e) {
                     e.preventDefault();
+
+                    that.cancelHide = true;
                     that.trigger("beforeopen", e);
                     that._currentTarget = e.currentTarget;
                     that.show(e.pageX, e.pageY);
+
                     return false;
                 });
             }
 
             $(that.element).on('mouseleave', function () {
-
                 that.cancelHide = false;
                 delay = options.delay || that.options.delay;
                 setTimeout(function () { that.hide() }, delay);
             });
 
             $(that.element).on('mouseenter', function () {
-
                 that.cancelHide = true;
             });
 
@@ -125,7 +126,7 @@
 
             var that = this;
 
-            if (!this.hiding) {
+            if (!that.hiding) {
 
                 //determine if off screen
                 var xPos = left + that.options.offsetX;
@@ -155,18 +156,22 @@
                     "left": xPos
                 });
 
-                // Display the context menu.
-                if (that.options.animation.open.effects == "fade") {
-                    $(that.element).fadeIn(function () {
-                        that.shown = true;
-                        $(that.element).addClass("k-custom-visible");
-                    });
-                } else if (that.options.animation.open.effects == "slide") {
-                    $(that.element).slideToggle('fast', function () {
-                        that.shown = true;
-                        $(that.element).addClass("k-custom-visible");
-                    });
+                //if already shown, just move the menu, no need to animate
+                if (!that.shown) {
+                    // Display the context menu.
+                    if (that.options.animation.open.effects == "fade") {
+                        $(that.element).fadeIn(function () {
+                            that.shown = true;
+                            $(that.element).addClass("k-custom-visible");
+                        });
+                    } else if (that.options.animation.open.effects == "slide") {
+                        $(that.element).slideToggle('fast', function () {
+                            that.shown = true;
+                            $(that.element).addClass("k-custom-visible");
+                        });
+                    }
                 }
+                
             }
 
         },
@@ -184,7 +189,6 @@
                 that._forceHide();
             }
         },
-
         _forceHide: function () {
             var that = this;
 
@@ -205,7 +209,6 @@
                 });
             }
         },
-
         _getSelectedDataItem: function (e) {
             /// <summary>
             /// Get the selected data item.
@@ -244,18 +247,19 @@
 
             if (this.options.itemSelect != undefined) {
 
-                e.target = that._currentTarget;
-                e.dataItem = that.options.dataSource ? that._getSelectedDataItem(e) : undefined;
+                e.target = this._currentTarget;
+                e.dataItem = that.options.dataSource ? this._getSelectedDataItem(e) : undefined;
 
-                that.options.itemSelect.apply(that, [e]);
+                this.options.itemSelect.apply(this, [e]);
             }
-			
-            if (that.options.closeOnClick == true)
-            {
-                that._forceHide();
+
+            if (this.options.closeOnClick == true) {
+                this._forceHide();
             }
-            this.hide();
+            else {
+                this.hide();
+            }
         },
     });
     kendo.ui.plugin(ExtContextMenu);
-})(jQuery, window.kendo);
+})(window.kendo, window.kendo.jQuery);
