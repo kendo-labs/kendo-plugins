@@ -14,7 +14,6 @@
         _itemTemplate: kendo.template("<li># if (iconCss.length > 0) { #<span class=' #=iconCss # k-icon'></span># } # #= text #</li>"),
 
         hiding: false,
-        shown: false,
         cancelHide: false,
 
         options: {
@@ -109,14 +108,23 @@
 
             // If the user is not clicking on the context menu, then hide the menu.
             $(document).on("click", function (e) {
+
                 // Ignore clicks on the contextmenu.
                 if ($(e.target).closest(".k-ext-contextmenu").length == 0) {
+
                     // If visible, then close the contextmenu.
+                    that.cancelHide = false;
                     that.hide();
                 }
             });
         },
 
+        isShown: function(){
+            var that = this;
+
+            return $(that.element).is(":visible");
+
+        },
         show: function (left, top) {
             /// <summary>
             /// Show the context menu.
@@ -126,20 +134,19 @@
 
             var that = this;
 
+            that.cancelHide = true;
+
             if (!that.hiding) {
 
                 //determine if off screen
                 var xPos = left + that.options.offsetX;
-                var yPos = top + that.options.offsetY;
+                var yPos = top + that.options.offsetY;               
 
                 if (that.options.enableScreenDetection) {
                     var eleHeight = $(that.element).height();
                     var eleWidth = $(that.element).width();
 
-                    if (
-                        (eleWidth + xPos) > window.innerWidth ||
-                        (eleHeight + yPos) > window.innerHeight
-                        ) {
+                    if ((eleWidth + xPos) > window.innerWidth || (eleHeight + yPos) > window.innerHeight) {
                         //off screen detected, need to ignore off set settings and mouse position and position to fix the menu
                         if ((eleWidth + xPos) > window.innerWidth) {
                             xPos = window.innerWidth - eleWidth - 5;
@@ -156,17 +163,14 @@
                     "left": xPos
                 });
 
-                //if already shown, just move the menu, no need to animate
-                if (!that.shown) {
+                if (!that.isShown()) {
                     // Display the context menu.
                     if (that.options.animation.open.effects == "fade") {
                         $(that.element).fadeIn(function () {
-                            that.shown = true;
                             $(that.element).addClass("k-custom-visible");
                         });
                     } else if (that.options.animation.open.effects == "slide") {
                         $(that.element).slideToggle('fast', function () {
-                            that.shown = true;
                             $(that.element).addClass("k-custom-visible");
                         });
                     }
@@ -183,7 +187,7 @@
 
             var that = this;
 
-            if (that.shown && !that.cancelHide) {
+            if (that.isShown() && !that.cancelHide) {
                 that.hiding = true;
 
                 that._forceHide();
@@ -198,13 +202,11 @@
             if (that.options.animation.close.effects == "fade") {
                 $(that.element).fadeOut(function () {
                     that.hiding = false;
-                    that.shown = false;
                     $(that.element).removeClass("k-custom-visible");
                 });
             } else if (that.options.animation.close.effects == "slide") {
                 $(that.element).slideToggle('fast', function () {
                     that.hiding = false;
-                    that.shown = false;
                     $(that.element).removeClass("k-custom-visible");
                 });
             }
