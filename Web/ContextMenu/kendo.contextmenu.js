@@ -21,7 +21,7 @@
             name: "ExtContextMenu",
             width: "100px",
             enableScreenDetection: true,
-            delay: 1000,
+            delay: 250,
             event: 'contextmenu',
             offsetY: 0,
             offsetX: 0,
@@ -44,27 +44,25 @@
             // If the list of items has been passed in...
             if (options.dataSource) {
                 // Handle any separators defined in the datasource.
-                $.each(options.dataSource, function (idx, item) {
-                    if (item.separator) {
-                        item.cssClass = "k-ext-menu-separator";
-                        item.text = "";
-                        item.content = "";
-                    }
-                });
+                //$.each(options.dataSource, function (idx, item) {
+                //    if (item.separator) {
+                //        item.cssClass = item.cssClass + " k-ext-menu-separator ";
+                //        item.text = "";
+                //        item.content = "";
+                //    }
+                //    else {
+                //        if (item.disabled) {
+                //            item.cssClass = item.cssClass + " k-state-disabled ";
+                //        }
+                //    }
+                //});
+
+                that.ProcessItems(element, options.dataSource);
+
             } else if (options.items) {
-                // Process the list of items passed in.
-                $.each(options.items, function (idx, item) {
-                    var html = "";
-                    if (item.separator) {
-                        item.cssClass = "k-ext-menu-separator";
-                        item.text = "";
-                        item.content = "";
-                    } else {
-                        item = $.extend({ iconCss: "" }, item);
-                        html = that._itemTemplate(item);
-                    }
-                    $(element).append(html);
-                });
+
+                that.ProcessItems(element, options.items);
+              
             }
 
             // Call the base class init.
@@ -82,7 +80,7 @@
                     that.cancelHide = true;
                     that.trigger("beforeopen", e);
                     that._currentTarget = e.currentTarget;
-                    that.show(e.pageX, e.pageY);
+                    that.show(e);
 
                     return false;
                 });
@@ -104,19 +102,43 @@
 
             that.bind("select", that._select);
 
-            $(that.element).css({ "width": that.options.width, "position": "absolute" }).addClass("k-block").addClass("k-ext-contextmenu");
+            $(that.element).css({ "width": that.options.width, "position": "absolute" }).addClass("k-block").addClass("k-ext-contextmenu");            
+        },
 
-            // If the user is not clicking on the context menu, then hide the menu.
-            $(document).on("click", function (e) {
+        ProcessItem: function (element, item) {
+            var that = this;
 
-                // Ignore clicks on the contextmenu.
-                if ($(e.target).closest(".k-ext-contextmenu").length == 0) {
+            if (item.separator) {
+                item.cssClass = item.cssClass + " k-ext-menu-separator ";
+                item.text = "";
+                item.content = "";
+            } else {
 
-                    // If visible, then close the contextmenu.
-                    that.cancelHide = false;
-                    that.hide();
+                if (item.disabled) {
+                    item.cssClass = item.cssClass + " k-state-disabled ";
                 }
+
+                item = $.extend({ iconCss: "" }, item);
+                html = that._itemTemplate(item);
+            }
+            $(element).append(html);
+        },
+        ProcessItems: function (element, items) {
+            var that = this;
+
+            // Process the list of items passed in.
+            $.each(items, function (idx, item) {
+                var html = "";
+
+                if (item.items) {
+                    that.ProcessItems(element, item.items); //RECURSION
+                }
+                else {
+                    that.ProcessItem(element, item);
+                }
+
             });
+
         },
 
         isShown: function(){
@@ -125,7 +147,8 @@
             return $(that.element).is(":visible");
 
         },
-        show: function (left, top) {
+        OLD_show: function (target) {
+            //THis method was the original method trying to figure out the screen position manually
             /// <summary>
             /// Show the context menu.
             /// <summary>
@@ -140,7 +163,7 @@
 
                 //determine if off screen
                 var xPos = left + that.options.offsetX;
-                var yPos = top + that.options.offsetY;               
+                var yPos = top + that.options.offsetY;
 
                 if (that.options.enableScreenDetection) {
                     var eleHeight = $(that.element).height();
@@ -174,10 +197,64 @@
                             $(that.element).addClass("k-custom-visible");
                         });
                     }
-                }
-                
-            }
 
+                    //var fn_remove = function (e) {
+                    //    // Ignore clicks on the contextmenu.
+                    //    if ($(e.target).closest(".k-ext-contextmenu").length == 0) {
+
+                    //        // If visible, then close the contextmenu.
+                    //        that.cancelHide = false;
+                    //        that.hide();
+                    //    }
+                    //};
+
+                    ////attach close action
+                    //// If the user is not clicking on the context menu, then hide the menu.
+                    //$(document).off(fn_remove);
+                    //$(document).on("click", fn_remove);
+
+                }
+
+            }            
+        },
+        show: function (target) {
+            /// <summary>This method uses jquery-ui's position widget to help with screen collision and simplies the positioning code.</summary>
+
+            var that = this;
+            var fn_PositionMenu = function () {
+                //jquery-ui position widget ****DEPENDENCY*****
+                $(that.element).position({
+                    my: myPostionX + " " + myPostionY,
+                    at: "top",
+                    of: target,
+                    collision: "fit"
+                });
+            };
+
+            that.cancelHide = true;
+
+            if (!that.hiding) {
+
+                var myPostionX = "left " + (that.options.offsetX) + "";
+                var myPostionY = "top " + (that.options.offsetY) + "";
+
+                if (!that.isShown()) {
+                    // Display the context menu.
+                    if (that.options.animation.open.effects == "fade") {
+                        $(that.element).fadeIn(function () {
+                            $(that.element).show();
+                            fn_PositionMenu();
+                        });
+                    } else if (that.options.animation.open.effects == "slide") {
+                        $(that.element).slideToggle('fast', function () {
+                            $(that.element).show();
+                            fn_PositionMenu();
+                        });
+                    }
+
+                }
+
+            }
         },
 
         hide: function () {
