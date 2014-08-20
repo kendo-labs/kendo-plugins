@@ -1,5 +1,8 @@
 # Kendo UI Plugins
 
+# Note
+Kendo UI Labs projects are experimental and largely built and supported by the community.  As such Telerik does not provide official support for any of the Kendo UI Labs projects via Telerik support agreements.  We do encourage you to open an issue or visit [Stack Overflow](http://www.stackoverflow.com).
+
 ## About Kendo Plugins
 
 Kendo Plugins is a library of third party widgets and controls written for Kendo UI by the community.
